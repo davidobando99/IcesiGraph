@@ -5,13 +5,13 @@ import java.util.HashMap;
 public class Graph<V,E> {
 	
 	private int[][] adjacentsMatrix; 
-	private HashMap<String, NodeGraph<V,E>> vertices;
+	private HashMap<String, NodeGraph<V>> vertices;
 	private HashMap<String, Edge<V,E>> edges;
 	
 	
 	public Graph() {
 		adjacentsMatrix = new int[vertices.size()][vertices.size()];
-		vertices= new HashMap<String, NodeGraph<V,E>>();
+		vertices= new HashMap<String, NodeGraph<V>>();
 		edges=new HashMap<String, Edge<V,E>>();
 		inicializeMatrix();
 	}
@@ -26,12 +26,12 @@ public class Graph<V,E> {
 		this.adjacentsMatrix = adjacentsMatrix;
 	}
 	
-	public HashMap<String, NodeGraph<V, E>> getVertices() {
+	public HashMap<String, NodeGraph<V>> getVertices() {
 		return vertices;
 	}
 
 
-	public void setVertices(HashMap<String, NodeGraph<V, E>> vertices) {
+	public void setVertices(HashMap<String, NodeGraph<V>> vertices) {
 		this.vertices = vertices;
 	}
 
@@ -46,17 +46,17 @@ public class Graph<V,E> {
 	}
 
 
-	public NodeGraph<V,E> searchVertex(String key) {
+	public NodeGraph<V> searchVertex(String key) {
 		return vertices.get(key);
 	}
 	
 	public void addVertex(String key, V newVertex) {
 		if(vertices.isEmpty()) { //Si la tabla esta vacia que la posicion en la matriz sea (0,0)
-			NodeGraph<V,E> vertex = new NodeGraph<V,E>(newVertex,0,0);
+			NodeGraph<V> vertex = new NodeGraph<V>(newVertex,0,0);
 			vertices.put(key, vertex);
 		}
 		else {
-			NodeGraph<V,E> vertex = new NodeGraph<V,E>(newVertex,vertices.size(),vertices.size() ); //si esta con al menos 1 que sea el (size,size)
+			NodeGraph<V> vertex = new NodeGraph<V>(newVertex,vertices.size(),vertices.size() ); //si esta con al menos 1 que sea el (size,size)
 			vertices.put(key, vertex);
 		}
 		
@@ -68,8 +68,8 @@ public class Graph<V,E> {
 	}
 	
 	public void insertEdge( E edge,String key,V vertex1, V vertex2, double weight) {
-		NodeGraph<V,E> origin = new NodeGraph<V,E>(vertex1);
-		NodeGraph<V,E> end = new NodeGraph<V,E>(vertex2);
+		NodeGraph<V> origin = new NodeGraph<V>(vertex1);
+		NodeGraph<V> end = new NodeGraph<V>(vertex2);
 		Edge<V,E> edge1 = new Edge<V,E>(edge, weight, origin, end);
 		edges.put(key, edge1);
 		addToMatrix(origin.getPosY(),end.getPosX());
@@ -97,8 +97,8 @@ public class Graph<V,E> {
 		
 	}
 	public boolean areAdjacents(String vertex1, String vertex2) {
-		NodeGraph<V,E> origin = searchVertex(vertex1);
-		NodeGraph<V,E> end = searchVertex(vertex2);
+		NodeGraph<V> origin = searchVertex(vertex1);
+		NodeGraph<V> end = searchVertex(vertex2);
 		if(adjacentsMatrix[origin.getPosY()][end.getPosX()]>0) {
 			return true;
 		}else return false;

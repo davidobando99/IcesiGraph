@@ -3,11 +3,11 @@ package collections;
 public class Edge<V,E> {
 	
 	private E value;
-	private NodeGraph<V,E> origin;
-	private NodeGraph<V,E> end;
+	private NodeGraph<V> origin;
+	private NodeGraph<V> end;
 	private Double weight;
 	
-	public Edge(E value, Double weight, NodeGraph<V,E> origin, NodeGraph<V,E> end){
+	public Edge(E value, Double weight, NodeGraph<V> origin, NodeGraph<V> end){
 		this.value=value;
 		this.weight=weight;
 		this.origin=origin;
@@ -25,19 +25,19 @@ public class Edge<V,E> {
 		this.value = value;
 	}
 
-	public NodeGraph<V, E> getOrigin() {
+	public NodeGraph<V> getOrigin() {
 		return origin;
 	}
 
-	public void setOrigin(NodeGraph<V, E> origin) {
+	public void setOrigin(NodeGraph<V> origin) {
 		this.origin = origin;
 	}
 
-	public NodeGraph<V, E> getEnd() {
+	public NodeGraph<V> getEnd() {
 		return end;
 	}
 
-	public void setEnd(NodeGraph<V, E> end) {
+	public void setEnd(NodeGraph<V> end) {
 		this.end = end;
 	}
 

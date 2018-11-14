@@ -1,15 +1,18 @@
 package collections;
 
-public class NodeGraph<V,E> {
+import java.util.HashMap;
+
+public class NodeGraph<V> {
 	
 	private V value;
 	private int posX;
 	private int posY;
-	private ILinkedList<NodeGraph<V,E>> adjList;
+	private HashMap<String, NodeGraph<V>> adjList;
+	
 	
 	public NodeGraph(V value) {
 		this.value =value;
-		adjList= new DoublyLinkedList<NodeGraph<V,E>>();
+		adjList= new HashMap<String, NodeGraph<V>>();
 	}
 	
 	//Constructor para matriz de adyacencia
@@ -17,10 +20,10 @@ public class NodeGraph<V,E> {
 		this.value =value;
 		this.posX=posX;
 		this.posY=posY;
-		adjList= new DoublyLinkedList<NodeGraph<V,E>>();
+		adjList= new HashMap<String, NodeGraph<V>>();
 	}
 	
-	public NodeGraph(V value, DoublyLinkedList<NodeGraph<V,E>> adjList) {
+	public NodeGraph(V value, HashMap<String, NodeGraph<V>> adjList) {
 		this.value =value;
 		this.adjList= adjList;
 	}
@@ -33,26 +36,26 @@ public class NodeGraph<V,E> {
 		this.value = value;
 	}
 
-	public ILinkedList<NodeGraph<V, E>> getAdjList() {
+	public  HashMap<String, NodeGraph<V>> getAdjList() {
 		return adjList;
 	}
 
-	public void setAdjList(ILinkedList<NodeGraph<V, E>> adjList) {
+	public void setAdjList( HashMap<String, NodeGraph<V>> adjList) {
 		this.adjList = adjList;
 	}
 	
 	
 	
-	public void addAdjacent(NodeGraph<V,E> adjacent) {
-		adjList.addItem(adjacent);
+	public void addAdjacent(String key,NodeGraph<V> adjacent) {
+		adjList.put(key, adjacent);
 	}
 	
-	public void removeAdjacent(NodeGraph<V,E> adjacent) {
-		adjList.deleteItem(adjacent);
+	public void removeAdjacent(String key) {
+		adjList.remove(key);
 	}
 	
-	public  boolean searchBoolean(NodeGraph<V,E> adjacent){
-		return adjList.isThereElement(adjacent);
+	public  NodeGraph<V> searchBoolean(String key){
+		return adjList.get(key);
 	}
 
 	public int getPosX() {
