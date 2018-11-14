@@ -3,10 +3,20 @@ package collections;
 public class NodeGraph<V,E> {
 	
 	private V value;
+	private int posX;
+	private int posY;
 	private ILinkedList<NodeGraph<V,E>> adjList;
 	
 	public NodeGraph(V value) {
 		this.value =value;
+		adjList= new DoublyLinkedList<NodeGraph<V,E>>();
+	}
+	
+	//Constructor para matriz de adyacencia
+	public NodeGraph(V value, int posX, int posY) {
+		this.value =value;
+		this.posX=posX;
+		this.posY=posY;
 		adjList= new DoublyLinkedList<NodeGraph<V,E>>();
 	}
 	
@@ -44,6 +54,24 @@ public class NodeGraph<V,E> {
 	public  boolean searchBoolean(NodeGraph<V,E> adjacent){
 		return adjList.isThereElement(adjacent);
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	
 	
 	
 	

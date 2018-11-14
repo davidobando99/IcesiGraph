@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 public class Graph<V,E> {
 	
-	private int[][] adjacentsMatrix;
+	private int[][] adjacentsMatrix; 
 	private HashMap<String, NodeGraph<V,E>> vertices;
 	private HashMap<String, Edge<V,E>> edges;
 	
 	
 	public Graph() {
-		adjacentsMatrix = new int[vertices.size()][edges.size()];
+		adjacentsMatrix = new int[vertices.size()][vertices.size()];
 		vertices= new HashMap<String, NodeGraph<V,E>>();
 		edges=new HashMap<String, Edge<V,E>>();
-		
+		inicializeMatrix();
 	}
 
 
@@ -51,8 +51,15 @@ public class Graph<V,E> {
 	}
 	
 	public void addVertex(String key, V newVertex) {
-		NodeGraph<V,E> vertex = new NodeGraph<V,E>(newVertex);
-		vertices.put(key, vertex);
+		if(vertices.isEmpty()) { //Si la tabla esta vacia que la posicion en la matriz sea (0,0)
+			NodeGraph<V,E> vertex = new NodeGraph<V,E>(newVertex,0,0);
+			vertices.put(key, vertex);
+		}
+		else {
+			NodeGraph<V,E> vertex = new NodeGraph<V,E>(newVertex,vertices.size(),vertices.size() ); //si esta con al menos 1 que sea el (size,size)
+			vertices.put(key, vertex);
+		}
+		
 	}
 	
 	public void removeVertex(String key) {
@@ -65,6 +72,9 @@ public class Graph<V,E> {
 		NodeGraph<V,E> end = new NodeGraph<V,E>(vertex2);
 		Edge<V,E> edge1 = new Edge<V,E>(edge, weight, origin, end);
 		edges.put(key, edge1);
+		addToMatrix(origin.getPosY(),end.getPosX());
+		
+		
 		
 	}
 	
@@ -73,8 +83,35 @@ public class Graph<V,E> {
 	}
 	
 	public Edge<V,E> removeEdge(String key){
+		
 		return edges.remove(key);
+		
 	}
+	
+	public void inicializeMatrix() {
+		 for(int i=0; i< adjacentsMatrix.length; i++){
+	            for(int j=0; j< adjacentsMatrix[i].length; j++){
+	                adjacentsMatrix[i][j] = 0;
+	            }
+		 }
+		
+	}
+	public boolean areAdjacents(String vertex1, String vertex2) {
+		NodeGraph<V,E> origin = searchVertex(vertex1);
+		NodeGraph<V,E> end = searchVertex(vertex2);
+		if(adjacentsMatrix[origin.getPosY()][end.getPosX()]>0) {
+			return true;
+		}else return false;
+	}
+	
+	public void addToMatrix(int i, int j){
+		adjacentsMatrix[i][j] += 1;
+    }
+    
+    public void removeFromMatrix(int i, int j){
+        if(adjacentsMatrix[i][j]>0)
+        	adjacentsMatrix[i][j] -= 1;
+    }
 	
 
 
