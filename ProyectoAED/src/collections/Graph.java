@@ -158,7 +158,6 @@ public class Graph<V, E> {
 	public Double[][] floydWarshall() {
 
 		Double[][] matrix = weightMatrix;
-
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix.length; j++) {
 				for (int k = 0; k < matrix.length; k++) {
