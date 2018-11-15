@@ -1,12 +1,15 @@
 package collections;
 
-import java.util.HashMap;
+
+import java.util.*;
 
 public class Graph<V,E> {
 	
 	private int[][] adjacentsMatrix; 
 	private HashMap<String, NodeGraph<V>> vertices;
 	private HashMap<String, Edge<V,E>> edges;
+	private PriorityQueue<NodeGraph<V>> queue;
+	private List< List< NodeGraph<V> > > ady = new ArrayList< List< NodeGraph<V> > >();
 	
 	
 	public Graph() {
@@ -111,6 +114,10 @@ public class Graph<V,E> {
     public void removeFromMatrix(int i, int j){
         if(adjacentsMatrix[i][j]>0)
         	adjacentsMatrix[i][j] -= 1;
+    }
+    
+    public void dijkstra() {
+    	
     }
 	
 
