@@ -6,6 +6,7 @@ public class Graph<V, E> {
 
 	public static final int SIZE = 10001; // maximo numero de vértices
 	public static final double INFINITY = 1 << 30;
+	public static final int AMOUNT=40;
 	private int[][] adjacentsMatrix;
 	private Double[][] weightMatrix;
 	private HashMap<String, NodeGraph<V>> vertices;
@@ -14,7 +15,8 @@ public class Graph<V, E> {
 	public Graph() {
 		vertices = new HashMap<String, NodeGraph<V>>();
 		edges = new HashMap<String,Edge<V, E>>();
-		adjacentsMatrix = new int[vertices.size()][vertices.size()];
+		adjacentsMatrix = new int[AMOUNT][AMOUNT];
+		weightMatrix=new Double[AMOUNT][AMOUNT];
 		
 		inicializeMatrix();
 	}
@@ -65,9 +67,9 @@ public class Graph<V, E> {
 
 	}
 
-	public void insertEdge(E edge, String key, V vertex1, V vertex2, double weight) {
-		NodeGraph<V> origin = new NodeGraph<V>(vertex1);
-		NodeGraph<V> end = new NodeGraph<V>(vertex2);
+	public void insertEdge(E edge, String key, String vertex1, String vertex2, double weight) {
+		NodeGraph<V> origin = searchVertex(vertex1);
+		NodeGraph<V> end = searchVertex(vertex2);
 		Edge<V, E> edge1 = new Edge<V, E>(edge, weight, origin, end);
 
 		edges.put(key, edge1);
