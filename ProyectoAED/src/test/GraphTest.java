@@ -16,7 +16,7 @@ class GraphTest {
 	}
 	
 	@Test
-	private void addVertexTest() {
+	public void addVertexTest() {
 		
 		setUpOne();
 		String vertex1= "Vertice1"; 

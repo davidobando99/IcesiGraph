@@ -12,9 +12,10 @@ public class Graph<V, E> {
 	private HashMap<String,Edge<V, E>> edges;
 
 	public Graph() {
-		adjacentsMatrix = new int[vertices.size()][vertices.size()];
 		vertices = new HashMap<String, NodeGraph<V>>();
 		edges = new HashMap<String,Edge<V, E>>();
+		adjacentsMatrix = new int[vertices.size()][vertices.size()];
+		
 		inicializeMatrix();
 	}
 
