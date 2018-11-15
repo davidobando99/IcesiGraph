@@ -9,12 +9,12 @@ public class Graph<V, E> {
 	private int[][] adjacentsMatrix;
 	private Double[][] weightMatrix;
 	private HashMap<String, NodeGraph<V>> vertices;
-	private ArrayList<Edge<V, E>> edges;
+	private HashMap<String,Edge<V, E>> edges;
 
 	public Graph() {
 		adjacentsMatrix = new int[vertices.size()][vertices.size()];
 		vertices = new HashMap<String, NodeGraph<V>>();
-		edges = new ArrayList<Edge<V, E>>();
+		edges = new HashMap<String,Edge<V, E>>();
 		inicializeMatrix();
 	}
 
@@ -34,11 +34,11 @@ public class Graph<V, E> {
 		this.vertices = vertices;
 	}
 
-	public ArrayList<Edge<V, E>> getEdges() {
+	public HashMap<String,Edge<V, E>> getEdges() {
 		return edges;
 	}
 
-	public void setEdges(ArrayList<Edge<V, E>> edges) {
+	public void setEdges(HashMap<String,Edge<V, E>> edges) {
 		this.edges = edges;
 	}
 
@@ -69,16 +69,22 @@ public class Graph<V, E> {
 		NodeGraph<V> end = new NodeGraph<V>(vertex2);
 		Edge<V, E> edge1 = new Edge<V, E>(edge, weight, origin, end);
 
-		edges.add(edge1);
+		edges.put(key, edge1);
 		addToMatrix(origin.getPosY(), end.getPosX());
+		
+		int x = edge1.getOrigin().getPosX();
+		int y = edge1.getEnd().getPosX();
+
+		weightMatrix[x][y] = edge1.getWeight();
+		weightMatrix[y][x] = edge1.getWeight();
 
 	}
 
-	public Edge<V, E> searchEdge(int key) {
+	public Edge<V, E> searchEdge(String key) {
 		return edges.get(key);
 	}
 
-	public Edge<V, E> removeEdge(int key) {
+	public Edge<V, E> removeEdge(String key) {
 
 		return edges.remove(key);
 
@@ -131,17 +137,6 @@ public class Graph<V, E> {
 
 	public void fillWeightMatrix() {
 
-		for (int i = 0; i < edges.size(); i++) {
-
-			Edge<V, E> edge = edges.get(i);
-
-			int x = edge.getOrigin().getPosX();
-			int y = edge.getEnd().getPosX();
-
-			weightMatrix[x][y] = edge.getWeight();
-			weightMatrix[y][x] = edge.getWeight();
-
-		}
 		for (int i = 0; i < adjacentsMatrix.length; i++) {
 			for (int j = 0; j < adjacentsMatrix.length; j++) {
 
