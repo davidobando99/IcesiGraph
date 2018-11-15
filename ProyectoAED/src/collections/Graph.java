@@ -5,10 +5,13 @@ import java.util.*;
 
 public class Graph<V,E> {
 	
+	public static final int SIZE = 10001;  //maximo numero de vértices
+	public static final int INF =1<<30;
 	private int[][] adjacentsMatrix; 
 	private HashMap<String, NodeGraph<V>> vertices;
 	private HashMap<String, Edge<V,E>> edges;
-	private PriorityQueue<NodeGraph<V>> queue;
+	
+	
 	private List< List< NodeGraph<V> > > ady = new ArrayList< List< NodeGraph<V> > >();
 	
 	
@@ -116,8 +119,27 @@ public class Graph<V,E> {
         	adjacentsMatrix[i][j] -= 1;
     }
     
-    public void dijkstra() {
-    	
+    public void dijkstra(V node) {
+    	 PriorityQueue<NodeGraph<V>> queue=new  PriorityQueue<NodeGraph<V>> ();
+    	 int[] distancia = new int[SIZE];
+    	 int[] anterior = new int[SIZE];  
+    	 boolean[] visitado = new boolean[ SIZE ]; 
+    	          
+    	 for( int i = 0 ; i <= vertices.size() ; i++ ){
+    		 
+    	    
+               distancia[i] = INF;  
+               anterior[i] = -1;
+               visitado[i] = false;
+              
+          
+    	 }
+    	 
+    	 queue.add(new NodeGraph<V>(node));
+    	 
+    	 
+    	 
+    	 
     }
 	
 
