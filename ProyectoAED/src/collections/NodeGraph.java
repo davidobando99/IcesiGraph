@@ -1,29 +1,28 @@
 package collections;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NodeGraph<V> {
 	
 	private V value;
 	private int posX;
-	private int posY;
-	private HashMap<String, NodeGraph<V>> adjList;
+	private ArrayList<NodeGraph<V>> adjList;
 	
 	
 	public NodeGraph(V value) {
 		this.value =value;
-		adjList= new HashMap<String, NodeGraph<V>>();
+		adjList= new ArrayList<NodeGraph<V>>();
 	}
 	
 	//Constructor para matriz de adyacencia
-	public NodeGraph(V value, int posX, int posY) {
+	public NodeGraph(V value, int posX) {
 		this.value =value;
 		this.posX=posX;
-		this.posY=posY;
-		adjList= new HashMap<String, NodeGraph<V>>();
+		adjList= new ArrayList<NodeGraph<V>>();
 	}
 	
-	public NodeGraph(V value, HashMap<String, NodeGraph<V>> adjList) {
+	public NodeGraph(V value, ArrayList<NodeGraph<V>> adjList) {
 		this.value =value;
 		this.adjList= adjList;
 	}
@@ -36,44 +35,37 @@ public class NodeGraph<V> {
 		this.value = value;
 	}
 
-	public  HashMap<String, NodeGraph<V>> getAdjList() {
+	public  ArrayList<NodeGraph<V>> getAdjList() {
 		return adjList;
 	}
 
-	public void setAdjList( HashMap<String, NodeGraph<V>> adjList) {
+	public void setAdjList( ArrayList<NodeGraph<V>> adjList) {
 		this.adjList = adjList;
 	}
 	
 	
 	
-	public void addAdjacent(String key,NodeGraph<V> adjacent) {
-		adjList.put(key, adjacent);
+	public void addAdjacent(NodeGraph<V> adjacent) {
+		adjList.add(adjacent);
 	}
 	
-	public void removeAdjacent(String key) {
-		adjList.remove(key);
+	public void removeAdjacent(NodeGraph<V> adjacent) {
+		adjList.remove(adjacent);
 	}
 	
-	public  NodeGraph<V> searchBoolean(String key){
-		return adjList.get(key);
-	}
+//	public  NodeGraph<V> searchBoolean(String key){
+//		return adjList.get(key);
+//	}
 
-	public int getPosX() {
+	public int getPos() {
 		return posX;
 	}
 
-	public void setPosX(int posX) {
+	public void setPos(int posX) {
 		this.posX = posX;
 	}
 
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
+	
 	
 	
 	
