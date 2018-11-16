@@ -2,8 +2,6 @@ package collections;
 
 import java.util.*;
 
-import mundo.Edificio;
-
 public class Graph<V, E> {
 
 	public static final int SIZE = 10001; // maximo numero de vértices
