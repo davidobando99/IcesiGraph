@@ -3,6 +3,7 @@ package collections;
 import java.util.*;
 
 public class Graph<V, E> {
+	
 
 	public static final int SIZE = 10001; // maximo numero de vértices
 	public static final double INFINITY = 1 << 30;
