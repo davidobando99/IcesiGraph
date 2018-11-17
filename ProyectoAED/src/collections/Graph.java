@@ -148,6 +148,7 @@ public class Graph<V, E> {
 
 	public void addToMatrix(int i, int j) {
 		adjacentsMatrix[i][j] += 1;
+		adjacentsMatrix[j][i] += 1;
 	}
 
 	public void removeFromMatrix(int i, int j) {
