@@ -265,7 +265,7 @@ public class Graph<V, E> {
 
 				
 				min = key[i];
-				System.out.println(min);
+//				System.out.println(min);
 				val = i;
 			}
 		}
@@ -273,12 +273,13 @@ public class Graph<V, E> {
 
 	}
 
-	public Double[] primMTS() {
+	public int[] primMTS() {
 		
 		NodeGraph<V>node=minEdge().getOrigin();
 		int key=node.getPos();
 
        Double dist[]= new Double[AMOUNT];
+       int order[]= new int[AMOUNT];
        String parent[]= new String[AMOUNT];
 		boolean[] visits = new boolean[AMOUNT];
 		for (int i = 0; i < visits.length; i++) {
@@ -290,11 +291,12 @@ public class Graph<V, E> {
 		dist[key]=0.0;
 		parent[key]= key+"";
 
-		for (int i = 0; i < visits.length-1; i++) {
+		for (int i = 0; i < visits.length; i++) {
 			
 			int u= minWeight(dist, visits);
 			visits[u]=true;
-//			System.out.println(u +" orden visitas");
+			order[i]=u;
+			
 			
 			for (int j = 0; j < visits.length; j++) {
 				
@@ -304,11 +306,12 @@ public class Graph<V, E> {
 					dist[j]=weightMatrix[u][j];
 				}
 			}
-			
+//			System.out.println(u +" orden visitas");
+//			System.out.println(visits[3]);
 		}
 		
 
-		return dist;
+		return order;
 
 	} 
 
@@ -348,7 +351,7 @@ public class Graph<V, E> {
 		grafo.insertEdge(edge6, "5", "C", "N", edge6);
 		grafo.insertEdge(edge7, "6", "N", "A", edge7);
 		
-		Double[] lista=grafo.primMTS();
+		int[] lista=grafo.primMTS();
 //		Double[] finish=grafo.prim(lista);
 		
 		for (int i = 0; i < lista.length; i++) {
