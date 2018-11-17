@@ -10,11 +10,11 @@ public class Graph<V, E> {
 	private int[][] adjacentsMatrix;
 	private double[][] weightMatrix;
 	private HashMap<String,NodeGraph<V>> vertices;
-	private HashMap<String,Edge<V, E>> edges;
+	private ArrayList<Edge<V, E>> edges;
 
 	public Graph() {
 		vertices = new  HashMap<String,NodeGraph<V>> ();
-		edges = new HashMap<String,Edge<V, E>>();
+		edges =new ArrayList <Edge<V,E>>();
 		adjacentsMatrix = new int[AMOUNT][AMOUNT];
 		weightMatrix=new double[AMOUNT][AMOUNT];
 		
@@ -47,11 +47,11 @@ public class Graph<V, E> {
 		this.vertices = vertices;
 	}
 
-	public HashMap<String,Edge<V, E>> getEdges() {
+	public ArrayList <Edge<V,E>> getEdges() {
 		return edges;
 	}
 
-	public void setEdges(HashMap<String,Edge<V, E>> edges) {
+	public void setEdges(ArrayList <Edge<V,E>> edges) {
 		this.edges = edges;
 	}
 
@@ -95,7 +95,7 @@ public class Graph<V, E> {
 		NodeGraph<V> end = searchVertex(vertex2);
 		Edge<V, E> edge1 = new Edge<V, E>(edge, weight, origin, end);
 
-		edges.put(key, edge1);
+		edges.add(edge1);
 		addToMatrix(origin.getPos(), end.getPos());
 		
 		int x = edge1.getOrigin().getPos();
@@ -107,16 +107,16 @@ public class Graph<V, E> {
 	   end.addAdjacent( origin);
 
 	}
+//
+//	public Edge<V, E> searchEdge(String key) {
+//		return edges.get(key);
+//	}
 
-	public Edge<V, E> searchEdge(String key) {
-		return edges.get(key);
-	}
+//	public Edge<V, E> removeEdge(String key) {
+//
+//		return edges.remove(key);
 
-	public Edge<V, E> removeEdge(String key) {
-
-		return edges.remove(key);
-
-	}
+//	}
 
 	public void inicializeMatrix() {
 		for (int i = 0; i < adjacentsMatrix.length; i++) {
@@ -237,6 +237,42 @@ public class Graph<V, E> {
 		return matrix;
 
 	}
+	
+	public int minWeight( boolean [] visits){
+		
+
+		double min=INFINITY;
+		int key=-1;
+		
+		for (int i=0; i<edges.size();i++) {
+			Edge<V,E> entry= edges.get(i);
+			if(entry.getWeight()<min && visits[i]) {
+				
+				min=entry.getWeight();
+				key=i;
+			}
+		}
+		return key;
+		
+	}
+	
+//	public Graph<V,E> prim() {
+//		
+//		ArrayList<Edge<V, E>> parent= new ArrayList<Edge<V, E>>();
+//		ArrayList<Edge<V, E>> key= new ArrayList<Edge<V, E>>();
+//		
+//		boolean []visits= new boolean[AMOUNT];
+//		
+//		for (int i = 0; i < visits.length; i++) {
+//			
+//		}
+//		
+//		
+//		
+//		
+//		
+//		
+//	}
 //	public static void main(String[] args) {
 //		Graph<Edificio, Double> grafo = new Graph<Edificio, Double>();
 //		Edificio A = new Edificio("A");
