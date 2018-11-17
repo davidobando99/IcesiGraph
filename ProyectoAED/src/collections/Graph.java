@@ -239,6 +239,20 @@ public class Graph<V, E> {
 		return matrix;
 
 	}
+	
+	public Edge<V,E> minEdge(){
+		
+		Edge<V,E> min=edges.get(0);
+		
+		for (int i = 0; i < edges.size(); i++) {
+			
+			if(edges.get(i).getWeight()<min.getWeight()) {
+				min=edges.get(i);
+			}
+		}
+		return min;
+		
+	}
 
 	public int minWeight(Double key[],boolean[] visits) {
 
@@ -251,6 +265,7 @@ public class Graph<V, E> {
 
 				
 				min = key[i];
+				System.out.println(min);
 				val = i;
 			}
 		}
@@ -258,32 +273,34 @@ public class Graph<V, E> {
 
 	}
 
-	public Double[] primMTS(String keyVertex) {
+	public Double[] primMTS() {
 		
-		NodeGraph<V>node= searchVertex(keyVertex);
+		NodeGraph<V>node=minEdge().getOrigin();
 		int key=node.getPos();
 
        Double dist[]= new Double[AMOUNT];
-       int parent[]= new int[AMOUNT];
+       String parent[]= new String[AMOUNT];
 		boolean[] visits = new boolean[AMOUNT];
 		for (int i = 0; i < visits.length; i++) {
 			dist[i]=INFINITY;
 			visits[i] = false;
 		}
 		
+		
 		dist[key]=0.0;
-		parent[key]=-1;
+		parent[key]= key+"";
 
 		for (int i = 0; i < visits.length-1; i++) {
 			
 			int u= minWeight(dist, visits);
 			visits[u]=true;
+//			System.out.println(u +" orden visitas");
 			
 			for (int j = 0; j < visits.length; j++) {
 				
 				if(weightMatrix[u][j]!=0 && !visits[j]&& weightMatrix[u][j]<dist[j]) {
-					parent[j]=u;
-					System.out.println(j);
+					parent[j]=u+ " --> " +j;
+//					System.out.println(parent[j]);
 					dist[j]=weightMatrix[u][j];
 				}
 			}
@@ -295,9 +312,10 @@ public class Graph<V, E> {
 
 	} 
 
-	public void prim(int key, Edge<V, E> edge, ArrayList<Double> dist) {
-
-		dist.set(key, 0.0);
+	public Double[] prim(Double []ordenar) {
+		
+		Arrays.sort(ordenar);
+		return ordenar;
 
 	}
 	public static void main(String[] args) {
@@ -330,11 +348,12 @@ public class Graph<V, E> {
 		grafo.insertEdge(edge6, "5", "C", "N", edge6);
 		grafo.insertEdge(edge7, "6", "N", "A", edge7);
 		
-		Double[] lista=grafo.primMTS("C");
+		Double[] lista=grafo.primMTS();
+//		Double[] finish=grafo.prim(lista);
 		
 		for (int i = 0; i < lista.length; i++) {
 			
-			System.out.println(i+ " VERTICE SIGUIENTE " + lista[i] );
+			System.out.println(i+ " VERTICE SIGUIENTE " + lista[i]);
 			
 		}
 		
