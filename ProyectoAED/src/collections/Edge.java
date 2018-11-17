@@ -1,6 +1,7 @@
 package collections;
 
-public class Edge<V,E> {
+
+public class Edge<V,E> implements Comparable<Edge<V,E>>{
 	
 	private E value;
 	private NodeGraph<V> origin;
@@ -48,6 +49,19 @@ public class Edge<V,E> {
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
+	
+	@Override
+	public int compareTo(Edge<V,E> edge) {
+		
+		int ret = 0;		
+		if(this.weight > edge.getWeight()) {
+			ret = 1;
+		}else {
+			ret = -1;
+		}
+		return ret;
+	}
+	
 	
 	
 	
