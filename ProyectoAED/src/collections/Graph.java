@@ -315,12 +315,6 @@ public class Graph<V, E> {
 
 	} 
 
-	public Double[] prim(Double []ordenar) {
-		
-		Arrays.sort(ordenar);
-		return ordenar;
-
-	}
 	public static void main(String[] args) {
 		Graph<String, Double> grafo= new Graph<String, Double>();
 		String S ="S";
@@ -351,8 +345,8 @@ public class Graph<V, E> {
 		grafo.insertEdge(edge6, "5", "C", "N", edge6);
 		grafo.insertEdge(edge7, "6", "N", "A", edge7);
 		
+		
 		int[] lista=grafo.primMTS();
-//		Double[] finish=grafo.prim(lista);
 		
 		for (int i = 0; i < lista.length; i++) {
 			
