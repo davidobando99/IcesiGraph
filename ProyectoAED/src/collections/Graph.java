@@ -357,6 +357,17 @@ public class Graph<V, E> {
 		
 		return minimunTree;
 	}
+	
+	public void dfs(boolean visited[], NodeGraph<V> origin, NodeGraph<V> end){
+		ArrayList<NodeGraph<V>> vertices = new ArrayList<NodeGraph<V>>();
+	    visited[ origin.getPos() ] = true;
+	    for( int i = 0 ; i < origin.getAdjList().size(); i++ ){
+	        if( !visited[origin.getAdjList().get(i).getPos()] && origin.getAdjList().get(i)!=end){
+	            dfs( visited, origin.getAdjList().get(i), end );
+	            vertices.add(origin.getAdjList().get(i));
+	        }
+	    }
+	}
 
 	public static void main(String[] args) {
 		Graph<String, Double> grafo= new Graph<String, Double>();
