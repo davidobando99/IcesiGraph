@@ -53,19 +53,7 @@ public class Graph<V, E> {
 		this.edges = edges;
 	}
 
-	public NodeGraph<V> searchVertexx(V value) {
-		boolean found = false;
-		NodeGraph<V> searched = null;
-		for (int i = 0; i < vertices.size() && !found; i++) {
-			if (vertices.get(i).getValue() == value) {
-				searched = vertices.get(i);
-				found = true;
-
-			}
-
-		}
-		return searched;
-	}
+	
 
 	public NodeGraph<V> searchVertex(String key) {
 		return vertices.get(key);
@@ -100,9 +88,7 @@ public class Graph<V, E> {
 		int x = edge1.getOrigin().getPos();
 		int y = edge1.getEnd().getPos();
 
-//		System.out.println(x +" pos x");
-//		System.out.println(y +" pos y");
-//		System.out.println(edge1.getWeight() +" get Wsigth");
+
 		weightMatrix[x][y] = edge1.getWeight();
 		weightMatrix[y][x] = edge1.getWeight();
 		origin.addAdjacent(end);
@@ -180,22 +166,19 @@ public class Graph<V, E> {
 			NodeGraph<V> actual = queue.peek();
 			queue.poll();
 			int posActual = actual.getPos();
-//    		 if(visited[posActual]) {
-//    			 continue;
-//    			 visited[posActual]=true;
-//    		 }
+
 
 			visited[posActual] = true;
 			for (int j = 0; j < actual.getAdjList().size(); j++) {
 				NodeGraph<V> adyacent = actual.getAdjList().get(j);
 				double peso = adjacentsWeight(actual, adyacent);
 				int posAdj = adyacent.getPos();
-				// if( !visited[ posAdj] ){
+				
 				if (distance[posActual] + peso < distance[posAdj]) {
 					distance[posAdj] = distance[posActual] + peso;
 					queue.offer(adyacent);
 
-					// }
+					
 				}
 
 			}
@@ -265,7 +248,7 @@ public class Graph<V, E> {
 
 				
 				min = key[i];
-//				System.out.println(min);
+
 				val = i;
 			}
 		}
@@ -302,18 +285,78 @@ public class Graph<V, E> {
 				
 				if(weightMatrix[u][j]!=0 && !visits[j]&& weightMatrix[u][j]<dist[j]) {
 					parent[j]=u+ " --> " +j;
-//					System.out.println(parent[j]);
+
 					dist[j]=weightMatrix[u][j];
 				}
 			}
-//			System.out.println(u +" orden visitas");
-//			System.out.println(visits[3]);
+
 		}
 		
 
 		return order;
 
 	} 
+	
+	public void makeSet(int parent[], int n ){
+	    for( int i = 0 ; i < n ; i++ ){
+	        parent[ i ] = i;      
+	    }
+	}
+	public int find(int parent[], int x) 
+	{ 
+		
+		    if( x == parent[ x ] ){          
+		        return x;                   
+		    }
+		    else return find(parent, parent[ x ] ); 
+	}
+	
+	public boolean sameRoot(int parent[], int x , int y ){
+	    if( find(parent, x ) == find(parent, y ) ) {
+	    	return true;   
+	    }else return false;
+	}
+	public void union(int parent[], int x, int y) 
+	{ 
+		    int xRoot = find(parent,x );    
+		    int yRoot = find(parent, y );    
+		    parent[ xRoot ] = yRoot;   
+	}
+	public ArrayList<Edge<V,E>> sortEdges(ArrayList<Edge<V,E>> edges) {
+		
+		for (int i=1; i < edges.size(); i++ ) {
+			for (int j=i; j>0 && edges.get(j-1).compareTo(edges.get(j))>0; j--) {
+		
+				Edge<V,E> tmp = edges.get(j);
+				edges.set(j, edges.get(j-1));
+				edges.set(j-1, tmp);
+				
+			}
+		}
+		return edges;
+	}
+
+	public Double[] kruskal() {
+		int total=0;
+		int numEdges = 0;
+		Double[] minimunTree = new Double[vertices.size()-1];
+		int[] parent = new int[vertices.size()];
+		makeSet(parent,vertices.size());
+		ArrayList<Edge<V,E>> edgesSorted = sortEdges(edges);
+		for(int i=0;i<edgesSorted.size();i++) {
+			int origin = edgesSorted.get(i).getOrigin().getPos();
+			int end = edgesSorted.get(i).getEnd().getPos();
+			double weight =edgesSorted.get(i).getWeight();
+			
+			if(!sameRoot(parent,origin,end)) {
+			    total+=weight;
+				minimunTree[numEdges++]=edgesSorted.get(i).getWeight();
+				union(parent,origin,end);
+			}
+		}
+		
+		return minimunTree;
+	}
 
 	public static void main(String[] args) {
 		Graph<String, Double> grafo= new Graph<String, Double>();

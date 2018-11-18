@@ -54,7 +54,7 @@ public class Edge<V,E> implements Comparable<Edge<V,E>>{
 	public int compareTo(Edge<V,E> edge) {
 		
 		int ret = 0;		
-		if(this.weight > edge.getWeight()) {
+		if(this.weight> edge.getWeight()) {
 			ret = 1;
 		}else {
 			ret = -1;
