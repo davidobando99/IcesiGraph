@@ -372,6 +372,57 @@ public class Graph<V, E> {
 	        }
 	    }
 	}
+	
+	public void displayVertex(NodeGraph<V> a) {
+		   System.out.println(a.getValue().toString());
+		}
+		
+		public NodeGraph<V> getAdjUnvisitedVertex(NodeGraph<V> as){
+			for(int j = 0; j < as.getAdjList().size(); j++) {
+				if(!as.getAdjList().get(j).isWasVisited()) {
+					return as.getAdjList().get(j);
+				}
+			}
+			
+			return null;
+		}
+		
+		public void assignVisit(ArrayList<NodeGraph<V>> a, NodeGraph<V> ae) {
+			for(int i = 0; i < a.size(); i++) {
+				if(a.get(i) == ae) {
+					a.get(i).setWasVisited(true);
+				}
+				
+			}
+		}
+
+		public void bfsGraph(String keyOrigin) {
+		Iterator<Map.Entry<String, NodeGraph<V>>> entries = vertices.entrySet().iterator();
+		ArrayList<NodeGraph<V>> vertexList = new ArrayList<NodeGraph<V>>();
+		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
+		
+		while(entries.hasNext()) {
+			Map.Entry<String, NodeGraph<V>> entry = entries.next();
+			vertexList.add(entry.getValue());
+		}
+		
+		vertexList.get(0).setWasVisited(true);
+		queue.add(vertexList.get(0));
+		displayVertex(vertexList.get(0));
+		NodeGraph<V> aux2;
+		
+		for(;!queue.isEmpty();) {
+			NodeGraph<V> aux = queue.remove();
+			while((aux2 = getAdjUnvisitedVertex(aux)) != null) {
+				assignVisit(vertexList, aux2);
+				displayVertex(aux2);
+				queue.add(aux2);
+			}
+			
+		}
+
+		}
+	
 
 	public static void main(String[] args) {
 //		Graph<String, Double> grafo= new Graph<String, Double>();
