@@ -144,6 +144,7 @@ public class Graph<V, E> {
 
 	public double[] dijkstra(String key) {
 		NodeGraph<V> node = searchVertex(key);
+//		System.out.println(node.getValue()+ "value node");
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
 		double[] distance = new double[vertices.size()];
 		boolean[] visited = new boolean[vertices.size()];
@@ -233,11 +234,12 @@ public class Graph<V, E> {
 				min=edges.get(i);
 			}
 		}
+		
 		return min;
 		
 	}
 
-	public int minWeight(Double key[],boolean[] visits) {
+	public int minWeight(double key[],boolean[] visits) {
 
 		double min = INFINITY;
 		int val = -1;
@@ -259,9 +261,10 @@ public class Graph<V, E> {
 	public int[] primMTS() {
 		
 		NodeGraph<V>node=minEdge().getOrigin();
+		System.out.println(node.getValue()+ "PRIM");
 		int key=node.getPos();
 
-       Double dist[]= new Double[AMOUNT];
+       double dist[]= new double[AMOUNT];
        int order[]= new int[AMOUNT];
        String parent[]= new String[AMOUNT];
 		boolean[] visits = new boolean[AMOUNT];
@@ -287,6 +290,7 @@ public class Graph<V, E> {
 					parent[j]=u+ " --> " +j;
 
 					dist[j]=weightMatrix[u][j];
+					
 				}
 			}
 
@@ -370,43 +374,43 @@ public class Graph<V, E> {
 	}
 
 	public static void main(String[] args) {
-		Graph<String, Double> grafo= new Graph<String, Double>();
-		String S ="S";
-		String C="C";
-		String N="N";
-		String D="D";
-		String A="A";
-		
-		Double edge1=12.0;
-		Double edge2=9.0;
-		Double edge3=13.0;
-		Double edge4=14.0;
-		Double edge5=7.0;
-		Double edge6=10.0;
-		Double edge7=8.0;
-		
-		grafo.addVertex("S", S);
-		grafo.addVertex("C", C);
-		grafo.addVertex("N", N);
-		grafo.addVertex("D", D);
-		grafo.addVertex("A", A);
-		
-		grafo.insertEdge(edge1, "0", "S", "C", edge1);
-		grafo.insertEdge(edge2, "1", "S", "D", edge2);
-		grafo.insertEdge(edge3, "2", "D", "C", edge3);
-		grafo.insertEdge(edge4, "3", "D", "A", edge4);
-		grafo.insertEdge(edge5, "4", "A", "C", edge5);
-		grafo.insertEdge(edge6, "5", "C", "N", edge6);
-		grafo.insertEdge(edge7, "6", "N", "A", edge7);
-		
-		
-		int[] lista=grafo.primMTS();
-		
-		for (int i = 0; i < lista.length; i++) {
-			
-			System.out.println(i+ " VERTICE SIGUIENTE " + lista[i]);
-			
-		}
+//		Graph<String, Double> grafo= new Graph<String, Double>();
+//		String S ="S";
+//		String C="C";
+//		String N="N";
+//		String D="D";
+//		String A="A";
+//		
+//		Double edge1=12.0;
+//		Double edge2=9.0;
+//		Double edge3=13.0;
+//		Double edge4=14.0;
+//		Double edge5=7.0;
+//		Double edge6=10.0;
+//		Double edge7=8.0;
+//		
+//		grafo.addVertex("S", S);
+//		grafo.addVertex("C", C);
+//		grafo.addVertex("N", N);
+//		grafo.addVertex("D", D);
+//		grafo.addVertex("A", A);
+//		
+//		grafo.insertEdge(edge1, "0", "S", "C", edge1);
+//		grafo.insertEdge(edge2, "1", "S", "D", edge2);
+//		grafo.insertEdge(edge3, "2", "D", "C", edge3);
+//		grafo.insertEdge(edge4, "3", "D", "A", edge4);
+//		grafo.insertEdge(edge5, "4", "A", "C", edge5);
+//		grafo.insertEdge(edge6, "5", "C", "N", edge6);
+//		grafo.insertEdge(edge7, "6", "N", "A", edge7);
+//		
+//		
+//		int[] lista=grafo.primMTS();
+//		
+//		for (int i = 0; i < lista.length; i++) {
+//			
+//			System.out.println(i+ " VERTICE SIGUIENTE " + lista[i]);
+//			
+//		}
 		
 //		Graph<Edificio, Double> grafo = new Graph<Edificio, Double>();
 //		Edificio A = new Edificio("A");

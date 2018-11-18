@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import collections.Graph;
@@ -195,9 +197,17 @@ class GraphTest {
 
 	}
 	
+	@Test
 	public void primMTSTest() {
 		
 		setUpTwo();
+		
+		String posVertex="1";
+		int [] prim=graph.primMTS();
+		
+		
+assertTrue(prim[0]==1);
+
 		
 		
 	}
