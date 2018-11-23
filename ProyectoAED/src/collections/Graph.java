@@ -53,8 +53,6 @@ public class Graph<V, E> {
 		this.edges = edges;
 	}
 
-	
-
 	public NodeGraph<V> searchVertex(String key) {
 		return vertices.get(key);
 	}
@@ -88,23 +86,22 @@ public class Graph<V, E> {
 		int x = edge1.getOrigin().getPos();
 		int y = edge1.getEnd().getPos();
 
-
 		weightMatrix[x][y] = edge1.getWeight();
 		weightMatrix[y][x] = edge1.getWeight();
 		origin.addAdjacent(end);
 		end.addAdjacent(origin);
 
 	}
-//
-//	public Edge<V, E> searchEdge(String key) {
-//		return edges.get(key);
-//	}
+	//
+	// public Edge<V, E> searchEdge(String key) {
+	// return edges.get(key);
+	// }
 
-//	public Edge<V, E> removeEdge(String key) {
-//
-//		return edges.remove(key);
+	// public Edge<V, E> removeEdge(String key) {
+	//
+	// return edges.remove(key);
 
-//	}
+	// }
 
 	public void inicializeMatrix() {
 		for (int i = 0; i < adjacentsMatrix.length; i++) {
@@ -144,7 +141,7 @@ public class Graph<V, E> {
 
 	public double[] dijkstra(String key) {
 		NodeGraph<V> node = searchVertex(key);
-//		System.out.println(node.getValue()+ "value node");
+		// System.out.println(node.getValue()+ "value node");
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
 		double[] distance = new double[vertices.size()];
 		boolean[] visited = new boolean[vertices.size()];
@@ -168,18 +165,16 @@ public class Graph<V, E> {
 			queue.poll();
 			int posActual = actual.getPos();
 
-
 			visited[posActual] = true;
 			for (int j = 0; j < actual.getAdjList().size(); j++) {
 				NodeGraph<V> adyacent = actual.getAdjList().get(j);
 				double peso = adjacentsWeight(actual, adyacent);
 				int posAdj = adyacent.getPos();
-				
+
 				if (distance[posActual] + peso < distance[posAdj]) {
 					distance[posAdj] = distance[posActual] + peso;
 					queue.offer(adyacent);
 
-					
 				}
 
 			}
@@ -223,32 +218,31 @@ public class Graph<V, E> {
 		return matrix;
 
 	}
-	
-	public Edge<V,E> minEdge(){
-		
-		Edge<V,E> min=edges.get(0);
-		
+
+	public Edge<V, E> minEdge() {
+
+		Edge<V, E> min = edges.get(0);
+
 		for (int i = 0; i < edges.size(); i++) {
-			
-			if(edges.get(i).getWeight()<min.getWeight()) {
-				min=edges.get(i);
+
+			if (edges.get(i).getWeight() < min.getWeight()) {
+				min = edges.get(i);
 			}
 		}
-		
+
 		return min;
-		
+
 	}
 
-	public int minWeight(double key[],boolean[] visits) {
+	public int minWeight(double key[], boolean[] visits) {
 
 		double min = INFINITY;
 		int val = -1;
 
 		for (int i = 0; i < key.length; i++) {
-			
+
 			if (key[i] < min && !visits[i]) {
 
-				
 				min = key[i];
 
 				val = i;
@@ -259,276 +253,293 @@ public class Graph<V, E> {
 	}
 
 	public int[] primMTS() {
-		
-		NodeGraph<V>node=minEdge().getOrigin();
-		System.out.println(node.getValue()+ "PRIM");
-		int key=node.getPos();
 
-       double dist[]= new double[AMOUNT];
-       int order[]= new int[AMOUNT];
-       String parent[]= new String[AMOUNT];
+		NodeGraph<V> node = minEdge().getOrigin();
+		System.out.println(node.getValue() + "PRIM");
+		int key = node.getPos();
+
+		double dist[] = new double[AMOUNT];
+		int order[] = new int[AMOUNT];
+		String parent[] = new String[AMOUNT];
 		boolean[] visits = new boolean[AMOUNT];
 		for (int i = 0; i < visits.length; i++) {
-			dist[i]=INFINITY;
+			dist[i] = INFINITY;
 			visits[i] = false;
 		}
-		
-		
-		dist[key]=0.0;
-		parent[key]= key+"";
+
+		dist[key] = 0.0;
+		parent[key] = key + "";
 
 		for (int i = 0; i < visits.length; i++) {
-			
-			int u= minWeight(dist, visits);
-			visits[u]=true;
-			order[i]=u;
-			
-			
-			for (int j = 0; j < visits.length; j++) {
-				
-				if(weightMatrix[u][j]!=0 && !visits[j]&& weightMatrix[u][j]<dist[j]) {
-					parent[j]=u+ " --> " +j;
 
-					dist[j]=weightMatrix[u][j];
-					
+			int u = minWeight(dist, visits);
+			visits[u] = true;
+			order[i] = u;
+
+			for (int j = 0; j < visits.length; j++) {
+
+				if (weightMatrix[u][j] != 0 && !visits[j] && weightMatrix[u][j] < dist[j]) {
+					parent[j] = u + " --> " + j;
+
+					dist[j] = weightMatrix[u][j];
+
 				}
 			}
 
 		}
-		
 
 		return order;
 
-	} 
-	
-	public void makeSet(int parent[], int n ){
-	    for( int i = 0 ; i < n ; i++ ){
-	        parent[ i ] = i;      
-	    }
 	}
-	public int find(int parent[], int x) 
-	{ 
-		
-		    if( x == parent[ x ] ){          
-		        return x;                   
-		    }
-		    else return find(parent, parent[ x ] ); 
+
+	public void makeSet(int parent[], int n) {
+		for (int i = 0; i < n; i++) {
+			parent[i] = i;
+		}
 	}
-	
-	public boolean sameRoot(int parent[], int x , int y ){
-	    if( find(parent, x ) == find(parent, y ) ) {
-	    	return true;   
-	    }else return false;
+
+	public int find(int parent[], int x) {
+
+		if (x == parent[x]) {
+			return x;
+		} else
+			return find(parent, parent[x]);
 	}
-	public void union(int parent[], int x, int y) 
-	{ 
-		    int xRoot = find(parent,x );    
-		    int yRoot = find(parent, y );    
-		    parent[ xRoot ] = yRoot;   
+
+	public boolean sameRoot(int parent[], int x, int y) {
+		if (find(parent, x) == find(parent, y)) {
+			return true;
+		} else
+			return false;
 	}
-	public ArrayList<Edge<V,E>> sortEdges(ArrayList<Edge<V,E>> edges) {
-		
-		for (int i=1; i < edges.size(); i++ ) {
-			for (int j=i; j>0 && edges.get(j-1).compareTo(edges.get(j))>0; j--) {
-		
-				Edge<V,E> tmp = edges.get(j);
-				edges.set(j, edges.get(j-1));
-				edges.set(j-1, tmp);
-				
+
+	public void union(int parent[], int x, int y) {
+		int xRoot = find(parent, x);
+		int yRoot = find(parent, y);
+		parent[xRoot] = yRoot;
+	}
+
+	public ArrayList<Edge<V, E>> sortEdges(ArrayList<Edge<V, E>> edges) {
+
+		for (int i = 1; i < edges.size(); i++) {
+			for (int j = i; j > 0 && edges.get(j - 1).compareTo(edges.get(j)) > 0; j--) {
+
+				Edge<V, E> tmp = edges.get(j);
+				edges.set(j, edges.get(j - 1));
+				edges.set(j - 1, tmp);
+
 			}
 		}
 		return edges;
 	}
 
 	public Double[] kruskal() {
-		int total=0;
+		int total = 0;
 		int numEdges = 0;
-		Double[] minimunTree = new Double[vertices.size()-1];
+		Double[] minimunTree = new Double[vertices.size() - 1];
 		int[] parent = new int[vertices.size()];
-		makeSet(parent,vertices.size());
-		ArrayList<Edge<V,E>> edgesSorted = sortEdges(edges);
-		for(int i=0;i<edgesSorted.size();i++) {
+		makeSet(parent, vertices.size());
+		ArrayList<Edge<V, E>> edgesSorted = sortEdges(edges);
+		for (int i = 0; i < edgesSorted.size(); i++) {
 			int origin = edgesSorted.get(i).getOrigin().getPos();
 			int end = edgesSorted.get(i).getEnd().getPos();
-			double weight =edgesSorted.get(i).getWeight();
-			
-			if(!sameRoot(parent,origin,end)) {
-			    total+=weight;
-				minimunTree[numEdges++]=edgesSorted.get(i).getWeight();
-				union(parent,origin,end);
-			}
-		}
-		
-		return minimunTree;
-	}
-	
-	public void dfs(boolean visited[], NodeGraph<V> origin, NodeGraph<V> end){
-		ArrayList<NodeGraph<V>> vertices = new ArrayList<NodeGraph<V>>();
-	    visited[ origin.getPos() ] = true;
-	    for( int i = 0 ; i < origin.getAdjList().size(); i++ ){
-	        if( !visited[origin.getAdjList().get(i).getPos()] && origin.getAdjList().get(i)!=end){
-	            dfs( visited, origin.getAdjList().get(i), end );
-	            vertices.add(origin.getAdjList().get(i));
-	        }
-	    }
-	}
-	
-	public void displayVertex(NodeGraph<V> a) {
-		   System.out.println(a.getValue().toString());
-		}
-		
-		public NodeGraph<V> getAdjUnvisitedVertex(NodeGraph<V> as){
-			for(int j = 0; j < as.getAdjList().size(); j++) {
-				if(!as.getAdjList().get(j).isWasVisited()) {
-					return as.getAdjList().get(j);
-				}
-			}
-			
-			return null;
-		}
-		
-		public void assignVisit(ArrayList<NodeGraph<V>> a, NodeGraph<V> ae) {
-			for(int i = 0; i < a.size(); i++) {
-				if(a.get(i) == ae) {
-					a.get(i).setWasVisited(true);
-				}
-				
+			double weight = edgesSorted.get(i).getWeight();
+
+			if (!sameRoot(parent, origin, end)) {
+				total += weight;
+				minimunTree[numEdges++] = edgesSorted.get(i).getWeight();
+				union(parent, origin, end);
 			}
 		}
 
-		public void bfsGraph(String keyOrigin) {
+		return minimunTree;
+	}
+
+	public void dfs(boolean visited[], NodeGraph<V> origin, NodeGraph<V> end) {
+		ArrayList<NodeGraph<V>> vertices = new ArrayList<NodeGraph<V>>();
+		visited[origin.getPos()] = true;
+		for (int i = 0; i < origin.getAdjList().size(); i++) {
+			if (!visited[origin.getAdjList().get(i).getPos()] && origin.getAdjList().get(i) != end) {
+				dfs(visited, origin.getAdjList().get(i), end);
+				vertices.add(origin.getAdjList().get(i));
+			}
+		}
+	}
+
+	public void displayVertex(NodeGraph<V> a) {
+		System.out.println(a.getValue().toString());
+	}
+
+	public NodeGraph<V> getAdjUnvisitedVertex(NodeGraph<V> as) {
+		for (int j = 0; j < as.getAdjList().size(); j++) {
+			if (!as.getAdjList().get(j).isWasVisited()) {
+				return as.getAdjList().get(j);
+			}
+		}
+
+		return null;
+	}
+
+	public void assignVisit(ArrayList<NodeGraph<V>> a, NodeGraph<V> ae) {
+		for (int i = 0; i < a.size(); i++) {
+			if (a.get(i) == ae) {
+				a.get(i).setWasVisited(true);
+			}
+
+		}
+	}
+
+	public void bfsGraph(String keyOrigin) {
 		Iterator<Map.Entry<String, NodeGraph<V>>> entries = vertices.entrySet().iterator();
 		ArrayList<NodeGraph<V>> vertexList = new ArrayList<NodeGraph<V>>();
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
-		
-		while(entries.hasNext()) {
+
+		while (entries.hasNext()) {
 			Map.Entry<String, NodeGraph<V>> entry = entries.next();
 			vertexList.add(entry.getValue());
 		}
-		
+
 		vertexList.get(0).setWasVisited(true);
 		queue.add(vertexList.get(0));
 		displayVertex(vertexList.get(0));
 		NodeGraph<V> aux2;
-		
-		for(;!queue.isEmpty();) {
+
+		for (; !queue.isEmpty();) {
 			NodeGraph<V> aux = queue.remove();
-			while((aux2 = getAdjUnvisitedVertex(aux)) != null) {
+			while ((aux2 = getAdjUnvisitedVertex(aux)) != null) {
 				assignVisit(vertexList, aux2);
 				displayVertex(aux2);
 				queue.add(aux2);
 			}
-			
-		}
 
 		}
-	
+
+	}
+
+	public void dfsGraph(NodeGraph<V> node) {
+		Stack<NodeGraph<V>> stack = new Stack<NodeGraph<V>>();
+		stack.add(node);
+		node.setWasVisited(true);
+		while (!stack.isEmpty()) {
+			NodeGraph<V> element = stack.pop();
+			System.out.print(element.getValue() + " ");
+
+			List<NodeGraph<V>> neighbours = element.getAdjList();
+			for (int i = 0; i < neighbours.size(); i++) {
+				NodeGraph<V> n = neighbours.get(i);
+				if (n != null && !n.isWasVisited()) {
+					stack.add(n);
+					n.setWasVisited(true);
+				}
+			}
+		}
+	}
 
 	public static void main(String[] args) {
-//		Graph<String, Double> grafo= new Graph<String, Double>();
-//		String S ="S";
-//		String C="C";
-//		String N="N";
-//		String D="D";
-//		String A="A";
-//		
-//		Double edge1=12.0;
-//		Double edge2=9.0;
-//		Double edge3=13.0;
-//		Double edge4=14.0;
-//		Double edge5=7.0;
-//		Double edge6=10.0;
-//		Double edge7=8.0;
-//		
-//		grafo.addVertex("S", S);
-//		grafo.addVertex("C", C);
-//		grafo.addVertex("N", N);
-//		grafo.addVertex("D", D);
-//		grafo.addVertex("A", A);
-//		
-//		grafo.insertEdge(edge1, "0", "S", "C", edge1);
-//		grafo.insertEdge(edge2, "1", "S", "D", edge2);
-//		grafo.insertEdge(edge3, "2", "D", "C", edge3);
-//		grafo.insertEdge(edge4, "3", "D", "A", edge4);
-//		grafo.insertEdge(edge5, "4", "A", "C", edge5);
-//		grafo.insertEdge(edge6, "5", "C", "N", edge6);
-//		grafo.insertEdge(edge7, "6", "N", "A", edge7);
-//		
-//		
-//		int[] lista=grafo.primMTS();
-//		
-//		for (int i = 0; i < lista.length; i++) {
-//			
-//			System.out.println(i+ " VERTICE SIGUIENTE " + lista[i]);
-//			
-//		}
-		
-//		Graph<Edificio, Double> grafo = new Graph<Edificio, Double>();
-//		Edificio A = new Edificio("A");
-//		Edificio B = new Edificio("B");
-//		Edificio C = new Edificio("C");
-//		Edificio D = new Edificio("D");
-//		Edificio E = new Edificio("E");
-//		Edificio Z = new Edificio("Z");
-//
-//
-//		
-//		grafo.addVertex("A",A);
-//		grafo.addVertex("B",B);
-//		grafo.addVertex("C",C);
-//		grafo.addVertex("D",D);
-//		grafo.addVertex("E",E);
-//		grafo.addVertex("Z",Z);
-//		Double edge1 = 4.0;
-//		Double edge2 = 2.0;
-//		Double edge3 = 1.0;
-//		Double edge4 = 5.0;
-//		Double edge5 = 8.0;
-//		Double edge6 = 10.0;
-//		Double edge7 = 2.0;
-//		Double edge8 = 6.0;
-//		Double edge9 = 3.0;
-//		String e1="ed1";
-//		String e2="ed2";
-//		String e3="ed3";
-//		String e4="ed4";
-//		String e5="ed5";
-//		String e6="ed6";
-//		String e7="ed7";
-//		String e8="ed8";
-//		String e9="ed9";
-//		
-//		grafo.insertEdge(edge1, e1, "A","B", edge1);
-//		grafo.insertEdge(edge2, e2, "A","C", edge2);
-//		grafo.insertEdge(edge3, e3, "C","B", edge3);
-//		grafo.insertEdge(edge4, e4, "B","D", edge4);
-//		grafo.insertEdge(edge5, e5, "C","D", edge5);
-//		grafo.insertEdge(edge6, e6, "C","E", edge6);
-//		grafo.insertEdge(edge7, e7, "E","D", edge7);
-//		grafo.insertEdge(edge8, e8, "D","Z", edge8);
-//		grafo.insertEdge(edge9, e9, "E","Z", edge9);
-//		
-//		System.out.println(grafo.getEdges().get(e1).getOrigin().getPos());
-//		System.out.println(grafo.getEdges().get(e1).getEnd().getPos());
-////		for(int i=0;i<grafo.getWeightMatrix().length;i++) {
-////			for(int j=0;j<grafo.getWeightMatrix().length;j++) {
-////				System.out.println(grafo.getWeightMatrix()[i][j]);
-////			}
-////		}
-////		
-//
-////		for(int i=0;i<grafo.getVertices().get(2).getAdjList().size();i++){
-////			
-////			System.out.println(grafo.getVertices().get(2).getAdjList().get(i).getValue().getName());
-////		}
-//		for(int i=0;i<grafo.dijkstra("A").length;i++) {
-//			System.out.println(grafo.dijkstra("A")[i]);
-//		}
-////		
-//		
-//		
-//		
+		// Graph<String, Double> grafo= new Graph<String, Double>();
+		// String S ="S";
+		// String C="C";
+		// String N="N";
+		// String D="D";
+		// String A="A";
+		//
+		// Double edge1=12.0;
+		// Double edge2=9.0;
+		// Double edge3=13.0;
+		// Double edge4=14.0;
+		// Double edge5=7.0;
+		// Double edge6=10.0;
+		// Double edge7=8.0;
+		//
+		// grafo.addVertex("S", S);
+		// grafo.addVertex("C", C);
+		// grafo.addVertex("N", N);
+		// grafo.addVertex("D", D);
+		// grafo.addVertex("A", A);
+		//
+		// grafo.insertEdge(edge1, "0", "S", "C", edge1);
+		// grafo.insertEdge(edge2, "1", "S", "D", edge2);
+		// grafo.insertEdge(edge3, "2", "D", "C", edge3);
+		// grafo.insertEdge(edge4, "3", "D", "A", edge4);
+		// grafo.insertEdge(edge5, "4", "A", "C", edge5);
+		// grafo.insertEdge(edge6, "5", "C", "N", edge6);
+		// grafo.insertEdge(edge7, "6", "N", "A", edge7);
+		//
+		//
+		// int[] lista=grafo.primMTS();
+		//
+		// for (int i = 0; i < lista.length; i++) {
+		//
+		// System.out.println(i+ " VERTICE SIGUIENTE " + lista[i]);
+		//
+		// }
+
+		// Graph<Edificio, Double> grafo = new Graph<Edificio, Double>();
+		// Edificio A = new Edificio("A");
+		// Edificio B = new Edificio("B");
+		// Edificio C = new Edificio("C");
+		// Edificio D = new Edificio("D");
+		// Edificio E = new Edificio("E");
+		// Edificio Z = new Edificio("Z");
+		//
+		//
+		//
+		// grafo.addVertex("A",A);
+		// grafo.addVertex("B",B);
+		// grafo.addVertex("C",C);
+		// grafo.addVertex("D",D);
+		// grafo.addVertex("E",E);
+		// grafo.addVertex("Z",Z);
+		// Double edge1 = 4.0;
+		// Double edge2 = 2.0;
+		// Double edge3 = 1.0;
+		// Double edge4 = 5.0;
+		// Double edge5 = 8.0;
+		// Double edge6 = 10.0;
+		// Double edge7 = 2.0;
+		// Double edge8 = 6.0;
+		// Double edge9 = 3.0;
+		// String e1="ed1";
+		// String e2="ed2";
+		// String e3="ed3";
+		// String e4="ed4";
+		// String e5="ed5";
+		// String e6="ed6";
+		// String e7="ed7";
+		// String e8="ed8";
+		// String e9="ed9";
+		//
+		// grafo.insertEdge(edge1, e1, "A","B", edge1);
+		// grafo.insertEdge(edge2, e2, "A","C", edge2);
+		// grafo.insertEdge(edge3, e3, "C","B", edge3);
+		// grafo.insertEdge(edge4, e4, "B","D", edge4);
+		// grafo.insertEdge(edge5, e5, "C","D", edge5);
+		// grafo.insertEdge(edge6, e6, "C","E", edge6);
+		// grafo.insertEdge(edge7, e7, "E","D", edge7);
+		// grafo.insertEdge(edge8, e8, "D","Z", edge8);
+		// grafo.insertEdge(edge9, e9, "E","Z", edge9);
+		//
+		// System.out.println(grafo.getEdges().get(e1).getOrigin().getPos());
+		// System.out.println(grafo.getEdges().get(e1).getEnd().getPos());
+		//// for(int i=0;i<grafo.getWeightMatrix().length;i++) {
+		//// for(int j=0;j<grafo.getWeightMatrix().length;j++) {
+		//// System.out.println(grafo.getWeightMatrix()[i][j]);
+		//// }
+		//// }
+		////
+		//
+		//// for(int i=0;i<grafo.getVertices().get(2).getAdjList().size();i++){
+		////
+		//// System.out.println(grafo.getVertices().get(2).getAdjList().get(i).getValue().getName());
+		//// }
+		// for(int i=0;i<grafo.dijkstra("A").length;i++) {
+		// System.out.println(grafo.dijkstra("A")[i]);
+		// }
+		////
+		//
+		//
+		//
 	}
-//	
+	//
 
 }
