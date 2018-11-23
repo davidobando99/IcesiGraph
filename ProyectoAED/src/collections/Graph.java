@@ -389,7 +389,7 @@ public class Graph<V, E> {
 		}
 	}
 
-	public void bfsGraph(String keyOrigin) {
+	public void bfsGraph() {
 		Iterator<Map.Entry<String, NodeGraph<V>>> entries = vertices.entrySet().iterator();
 		ArrayList<NodeGraph<V>> vertexList = new ArrayList<NodeGraph<V>>();
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
