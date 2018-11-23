@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
@@ -20,11 +21,6 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="754.0" prefWidth="1203.0">
                      <children>
-                        <ImageView fx:id="map" fitHeight="656.0" fitWidth="875.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../imagenes/mapa.png" />
-                           </image>
-                        </ImageView>
                         <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" text="Mostrar Ruta" textFill="#1a5d9c">
                            <font>
                               <Font name="System Bold Italic" size="17.0" />
@@ -35,6 +31,18 @@
                         <Rectangle fx:id="L" arcHeight="5.0" arcWidth="5.0" fill="#1fffdb" height="124.0" layoutX="491.0" layoutY="126.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
                         <Line fx:id="lineCol1_L" endX="142.0" endY="-34.0" layoutX="345.0" layoutY="211.0" opacity="0.0" startY="4.0" />
                         <Rectangle fx:id="C" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="528.0" layoutY="371.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+                        <Canvas fx:id="canvas" height="669.0" layoutX="27.0" layoutY="26.0" width="870.0">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Canvas>
                      </children>
                   </AnchorPane>
             </content>

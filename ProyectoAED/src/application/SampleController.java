@@ -2,7 +2,10 @@ package application;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -34,6 +37,9 @@ public class SampleController {
 
 	@FXML
 	private Line lineCol1_L;
+	
+	@FXML
+    private Canvas canvas;
 
 	private String origin;
 
@@ -47,16 +53,25 @@ public class SampleController {
 	EventHandler e;
 
 	public void initialize() {
-
+		
+		
 		path = true;
 		origin = "";
 		end = "";
 		icesi = new Icesi();
-		verificateMap();
-		coliseoClick();
-		LClick();
-		CClick();
+//		verificateMap();
+//		coliseoClick();
+//		LClick();
+//		CClick();
+		canvas();
 		// darL();
+		
+	}
+	public void canvas() {
+		Image image = new Image(getClass().getResourceAsStream("./imagenes/mapa.png"));
+		
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.drawImage(image, canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getHeight());
 	}
 
 	public void verificateMap() {
