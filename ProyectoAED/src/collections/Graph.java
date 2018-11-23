@@ -148,7 +148,7 @@ public class Graph<V, E> {
 
 		int i = 0;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
-			if (entry.getKey() == key) {
+			if (entry.getKey().equals(key)) {
 				distance[i] = 0.0;
 				visited[i] = false;
 			} else {
