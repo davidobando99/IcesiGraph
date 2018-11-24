@@ -38,6 +38,7 @@ public interface IGraph<V,E> {
 	public void displayVertex(NodeGraph<V> a);
 	public NodeGraph<V> getAdjUnvisitedVertex(NodeGraph<V> as);
 	public void assignVisit(ArrayList<NodeGraph<V>> a, NodeGraph<V> ae);
+	
 	public void bfsGraph() ;
 	public void dfsGraph(NodeGraph<V> node);
 	
