@@ -25,7 +25,7 @@
                               <Font name="System Bold Italic" size="17.0" />
                            </font>
                         </Button>
-                        <TextArea layoutX="955.0" layoutY="100.0" prefHeight="363.0" prefWidth="336.0" />
+                        <TextArea fx:id="txtRute" layoutX="955.0" layoutY="100.0" prefHeight="363.0" prefWidth="336.0" />
                         <ImageView fx:id="map" fitHeight="676.0" fitWidth="947.0" layoutX="25.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../imagenes/mapaa.png" />
@@ -46,7 +46,7 @@
                         <Rectangle fx:id="A" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="62.0" layoutX="666.0" layoutY="179.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
                         <Rectangle fx:id="N" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="58.0" layoutX="154.0" layoutY="393.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
                         <Rectangle fx:id="Coliseo2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="324.0" layoutY="369.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                        <Rectangle fx:id="Bienestar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="401.0" layoutY="197.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+                        <Rectangle fx:id="I" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="401.0" layoutY="197.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
                         <Rectangle fx:id="G" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="641.0" layoutY="390.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
                      </children>
                   </AnchorPane>

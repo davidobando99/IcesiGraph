@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,14 +47,14 @@ class GraphTest {
 		Double edge7 = 8.0;
 		Double edge8 = 20.0;
 
-		graph.insertEdge(edge1, "0", "0", "1", edge1);
-		graph.insertEdge(edge2, "1", "0", "2", edge2);
-		graph.insertEdge(edge3, "2", "2", "1", edge3);
-		graph.insertEdge(edge4, "3", "2", "3", edge4);
-		graph.insertEdge(edge5, "4", "3", "4", edge7);
-		graph.insertEdge(edge6, "5", "1", "3", edge5);
-		graph.insertEdge(edge7, "6", "1", "4", edge6);
-		graph.insertEdge(edge8, "7", "0", "4", edge8);
+		graph.insertEdge(edge1, "0", "1", edge1);
+		graph.insertEdge(edge2, "0", "2", edge2);
+		graph.insertEdge(edge3, "2", "1", edge3);
+		graph.insertEdge(edge4, "2", "3", edge4);
+		graph.insertEdge(edge5, "3", "4", edge7);
+		graph.insertEdge(edge6, "1", "3", edge5);
+		graph.insertEdge(edge7, "1", "4", edge6);
+		graph.insertEdge(edge8, "0", "4", edge8);
 
 	}
 
@@ -85,8 +84,7 @@ class GraphTest {
 		graph.addVertex(key2, vertex2);
 
 		Double edge = 6.0;
-		String keyEdge = "0";
-		graph.insertEdge(edge, keyEdge, key1, key2, 6.0);
+		graph.insertEdge(edge, key1, key2, 6.0);
 
 		Double found = graph.getEdges().get(0).getValue();
 //		System.out.println(graph.floydWarshall()[0][1]);
@@ -116,8 +114,7 @@ class GraphTest {
 		graph.addVertex(key2, vertex2);
 
 		Double edge = 6.0;
-		String keyEdge = "0";
-		graph.insertEdge(edge, keyEdge, key, key2, 6);
+		graph.insertEdge(edge, key, key2, 6);
 
 		graph.getEdges().remove(0);
 
@@ -133,8 +130,7 @@ class GraphTest {
 		String key2 = "1";
 
 		Double edge = 6.0;
-		String keyEdge = "0";
-		graph.insertEdge(edge, keyEdge, key, key2, 6);
+		graph.insertEdge(edge, key, key2, 6);
 
 		boolean result = graph.areAdjacents(key, key2);
 		boolean result2 = graph.areAdjacents(key2, key);
@@ -196,20 +192,17 @@ class GraphTest {
 		assertEquals(minWay2, matrix[2][4]);
 
 	}
-	
+
 	@Test
 	public void primMTSTest() {
-		
-		setUpTwo();
-		
-		String posVertex="1";
-		int [] prim=graph.primMTS();
-		
-		
-assertTrue(prim[0]==1);
 
-		
-		
+		setUpTwo();
+
+//		String posVertex = "1";
+		int[] prim = graph.primMTS();
+
+		assertTrue(prim[0] == 1);
+
 	}
 
 }

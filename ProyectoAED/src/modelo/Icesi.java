@@ -1,22 +1,38 @@
 package modelo;
 
+import java.util.ArrayList;
+
 import collections.Graph;
 
 public class Icesi {
-	
-	private Graph<Building,Route> graph;
+
+	private Graph<Building, Route> graph;
+
 	public Icesi() {
-		graph= new Graph<Building,Route>();
+		graph = new Graph<Building, Route>();
 		addBuildings();
 		addRoutes();
 	}
+
 	public Graph<Building, Route> getGraph() {
 		return graph;
 	}
+
 	public void setGraph(Graph<Building, Route> graph) {
 		this.graph = graph;
 	}
-	
+
+	public ArrayList<Building> wayTo(String origin, String end) {
+
+		graph.print(graph.dijkstraNodes(origin), graph.foundPos(end));
+
+		return graph.getNodes();
+
+	}
+	public void cleanRoute() {
+		graph.getNodes().clear();
+	}
+
 	public void addBuildings() {
 		graph.addVertex("A", new Building("A"));
 		graph.addVertex("Auditorios", new Building("Auditorios"));
@@ -39,18 +55,17 @@ public class Icesi {
 		graph.addVertex("K", new Building("K"));
 		graph.addVertex("M", new Building("M"));
 		graph.addVertex("N", new Building("N"));
-		graph.addVertex("Saman", new Building("Saman"));	
-		
+		graph.addVertex("Saman", new Building("Saman"));
 
 	}
-	
+
 	public void addRoutes() {
 		graph.insertEdge(new Route(26), "A", "Biblioteca", 26);
 		graph.insertEdge(new Route(13.4), "A", "Saman", 13.4);
 		graph.insertEdge(new Route(48.5), "B", "C", 48.5);
 		graph.insertEdge(new Route(26), "B", "Biblioteca", 26);
 		graph.insertEdge(new Route(54.2), "B", "Wonka", 54.2);
-		graph.insertEdge(new Route(13.4), "B", "Saman", 13.4);	
+		graph.insertEdge(new Route(13.4), "B", "Saman", 13.4);
 		graph.insertEdge(new Route(8.2), "C", "D", 8.2);
 		graph.insertEdge(new Route(19.6), "D", "E", 19.6);
 		graph.insertEdge(new Route(22.8), "D", "I", 22.8);
@@ -84,36 +99,27 @@ public class Icesi {
 		graph.insertEdge(new Route(52.7), "Coliseo1", "L", 52.7);
 		graph.insertEdge(new Route(40), "CF", "I", 40);
 
-		
-		
-		
-		
 	}
-	
+
 	public void dijkstra() {
-		graph.print(graph.dijkstraNodes("M"),graph.foundPos("Central"));
-		 for(int i=0;i<graph.getNodes().size();i++) {
-			 System.out.println(graph.getNodes().get(i).getName());
-		 }
+		graph.print(graph.dijkstraNodes("M"), graph.foundPos("Central"));
+		for (int i = 0; i < graph.getNodes().size(); i++) {
+			System.out.println(graph.getNodes().get(i).getName());
+		}
 	}
-	
+
 	public void dij() {
-		for(int i=0;i<graph.dijkstra("M").length;i++) {
+		for (int i = 0; i < graph.dijkstra("M").length; i++) {
 			System.out.println(graph.dijkstra("M")[i]);
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		Icesi n= new Icesi();
+		Icesi n = new Icesi();
 //		System.out.println(n.getGraph().getEdges().get(0).getOrigin().getValue().getName());
 //		System.out.println(n.getGraph().getEdges().get(0).getEnd().getValue().getName());
 //		System.out.println(n.getGraph().getVertices().get("M").getPos());
 //	    n.dij();
 	}
-	
-	
-	
-	
-	
 
 }

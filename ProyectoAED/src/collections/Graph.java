@@ -595,15 +595,6 @@ public class Graph<V, E> {
 		 Double edge7 = 2.0;
 		 Double edge8 = 6.0;
 		 Double edge9 = 3.0;
-		 String e1="ed1";
-		 String e2="ed2";
-		 String e3="ed3";
-		 String e4="ed4";
-		 String e5="ed5";
-		 String e6="ed6";
-		 String e7="ed7";
-		 String e8="ed8";
-		 String e9="ed9";
 		
 		 grafo.insertEdge(edge1, "A","B", edge1);
 		 grafo.insertEdge(edge2, "A","C", edge2);
