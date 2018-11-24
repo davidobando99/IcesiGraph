@@ -5,9 +5,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -27,22 +26,28 @@
                            </font>
                         </Button>
                         <TextArea layoutX="955.0" layoutY="100.0" prefHeight="363.0" prefWidth="336.0" />
-                        <Rectangle fx:id="Coliseo1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="95.0" layoutX="249.0" layoutY="173.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />
-                        <Rectangle fx:id="L" arcHeight="5.0" arcWidth="5.0" fill="#1fffdb" height="124.0" layoutX="491.0" layoutY="126.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
+                        <ImageView fx:id="map" fitHeight="676.0" fitWidth="947.0" layoutX="25.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../imagenes/mapaa.png" />
+                           </image>
+                        </ImageView>
+                        <Canvas fx:id="canvas" height="677.0" layoutX="25.0" layoutY="26.0" width="845.0" />
+                        <Rectangle fx:id="Coliseo1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="488.0" layoutY="434.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="81.0" />
+                        <Rectangle fx:id="L" arcHeight="5.0" arcWidth="5.0" fill="#2193ff" height="76.0" layoutX="448.0" layoutY="254.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="137.0" />
+                        <Rectangle fx:id="C" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="111.0" layoutX="486.0" layoutY="112.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                         <Line fx:id="lineCol1_L" endX="142.0" endY="-34.0" layoutX="345.0" layoutY="211.0" opacity="0.0" startY="4.0" />
-                        <Rectangle fx:id="C" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="528.0" layoutY="371.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
-                        <Canvas fx:id="canvas" height="669.0" layoutX="27.0" layoutY="26.0" width="870.0">
-                           <effect>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant />
-                                 </light>
-                              </Lighting>
-                           </effect>
-                        </Canvas>
+                        <Rectangle fx:id="D" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="105.0" layoutX="438.0" layoutY="100.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle fx:id="E" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="387.0" layoutY="48.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+                        <Rectangle fx:id="Saman" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="83.0" layoutX="596.0" layoutY="73.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+                        <Rectangle fx:id="Biblioteca" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="69.0" layoutX="603.0" layoutY="174.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+                        <Rectangle fx:id="B" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="567.0" layoutY="176.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="31.0" />
+                        <Rectangle fx:id="Central" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="654.0" layoutY="254.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
+                        <Rectangle fx:id="Auditorios" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="733.0" layoutY="212.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="81.0" />
+                        <Rectangle fx:id="A" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="62.0" layoutX="666.0" layoutY="179.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
+                        <Rectangle fx:id="N" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="58.0" layoutX="154.0" layoutY="393.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
+                        <Rectangle fx:id="Coliseo2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="324.0" layoutY="369.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                        <Rectangle fx:id="Bienestar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="401.0" layoutY="197.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+                        <Rectangle fx:id="G" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="641.0" layoutY="390.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
                      </children>
                   </AnchorPane>
             </content>
