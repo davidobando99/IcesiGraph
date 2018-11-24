@@ -161,8 +161,8 @@ public class Graph<V, E> {
 		int i = 0;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
 			if (entry.getKey().equals(key)) {
-				distance[i] = 0.0;
-				visited[i] = false;
+				distance[node.getPos()] = 0.0;
+				visited[node.getPos()] = true;
 			} else {
 				distance[i] = INFINITY;
 				visited[i] = false;
@@ -210,8 +210,8 @@ public class Graph<V, E> {
 		int i = 0;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
 			if (entry.getKey().equals(key)) {
-				distance[i] = 0.0;
-				visited[i] = false;
+				distance[node.getPos()] = 0.0;
+				visited[node.getPos()] = true;
 				
 			} else {
 				distance[i] = INFINITY;
