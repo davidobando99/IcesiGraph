@@ -7,7 +7,8 @@ public class Icesi {
 	private Graph<Building,Route> graph;
 	public Icesi() {
 		graph= new Graph<Building,Route>();
-		addVertex();
+		addBuildings();
+		addRoutes();
 	}
 	public Graph<Building, Route> getGraph() {
 		return graph;
@@ -16,7 +17,7 @@ public class Icesi {
 		this.graph = graph;
 	}
 	
-	public void addVertex() {
+	public void addBuildings() {
 		graph.addVertex("L", new Building("L"));
 		graph.addVertex("Coliseo1", new Building("Coliseo1"));
 		graph.addVertex("Coliseo2", new Building("Coliseo2"));
@@ -33,6 +34,14 @@ public class Icesi {
 		graph.addVertex("Biblioteca", new Building("Biblioteca"));
 		graph.addVertex("Auditorios", new Building("Auditorios"));
 	}
+	
+	public void addRoutes() {
+		graph.insertEdge(new Route(53), "M", "Central", 53);
+		graph.insertEdge(new Route(27), "Auditorios", "Central", 27);
+		graph.insertEdge(new Route(8), "M", "Auditorios", 8);
+	}
+	
+	
 	
 	
 	

@@ -75,7 +75,7 @@ public class Graph<V, E> {
 
 	}
 
-	public void insertEdge(E edge, String key, String vertex1, String vertex2, double weight) {
+	public void insertEdge(E edge,String vertex1, String vertex2, double weight) {
 		NodeGraph<V> origin = searchVertex(vertex1);
 		NodeGraph<V> end = searchVertex(vertex2);
 		Edge<V, E> edge1 = new Edge<V, E>(edge, weight, origin, end);
@@ -145,6 +145,52 @@ public class Graph<V, E> {
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
 		double[] distance = new double[vertices.size()];
 		boolean[] visited = new boolean[vertices.size()];
+
+		int i = 0;
+		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
+			if (entry.getKey().equals(key)) {
+				distance[i] = 0.0;
+				visited[i] = false;
+			} else {
+				distance[i] = INFINITY;
+				visited[i] = false;
+			}
+			i++;
+		}
+
+		queue.offer(node);
+
+		while (!queue.isEmpty()) {
+			NodeGraph<V> actual = queue.peek();
+			queue.poll();
+			int posActual = actual.getPos();
+
+			visited[posActual] = true;
+			for (int j = 0; j < actual.getAdjList().size(); j++) {
+				NodeGraph<V> adyacent = actual.getAdjList().get(j);
+				double peso = adjacentsWeight(actual, adyacent);
+				int posAdj = adyacent.getPos();
+
+				if (distance[posActual] + peso < distance[posAdj]) {
+					distance[posAdj] = distance[posActual] + peso;
+					queue.offer(adyacent);
+
+				}
+
+			}
+
+		}
+		return distance;
+
+	}
+	
+	public double[] dijkstraNodes(String key) {
+		NodeGraph<V> node = searchVertex(key);
+		// System.out.println(node.getValue()+ "value node");
+		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
+		double[] distance = new double[vertices.size()];
+		boolean[] visited = new boolean[vertices.size()];
+		ArrayList<ArrayList<Integer>> nodes= new ArrayList<ArrayList<Integer>>();
 
 		int i = 0;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
