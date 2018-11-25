@@ -175,7 +175,7 @@ public class Icesi {
 			System.out.println(graph.dijkstra("M")[i]);
 		}
 	}
-	
+
 	/**
 	 * Se encarga de buscar la distancia minima del edificio actual al edificio
 	 * destino DIJKSTRA.
@@ -191,10 +191,23 @@ public class Icesi {
 	}
 
 	/**
-	 * Muestra todos  los edificios mediante el algoritmo BFS.
+	 * Muestra todos los edificios mediante el algoritmo BFS.
+	 * 
 	 * @return
 	 */
-	public String showAllBuildingBFS() {
+	public String[] showAllBuildingBFS() {
+
+		ArrayList<String> aux = graph.bfsGraph();
+		String[] ak = new String[aux.size()];
+		for (int i = 0; i < aux.size(); i++) {
+			ak[i] = aux.get(i);
+			System.out.println(aux.get(i) +" elemento BFS");
+		}
+
+		return ak;
+	}
+	/*
+	   public String showAllBuildingBFS() {
 		String ak = "";
 		ArrayList<String> aux = graph.bfsGraph();
 		for(int i = 0; i < aux.size(); i++) {
@@ -202,54 +215,60 @@ public class Icesi {
 		}
 	
 		return ak;
-	}
-	
+}
+	 */
+
 	/**
-	 * Para dar el tiempo de llegada. Se asume que recorro un metro en 0,022 segundos.
-	 * Se le pasa el peso de la arista como parametro.
+	 * Para dar el tiempo de llegada. Se asume que recorro un metro en 0,022
+	 * segundos. Se le pasa el peso de la arista como parametro.
+	 * 
 	 * @return tiempo
 	 */
 	public double calcularTiempoDeRecorrido(double a) {
 		return a * 0.022;
 	}
-	
+
 	/**
 	 * Edificios cercanos o adyacentes a mi ubicación actual.
+	 * 
 	 * @return
 	 */
 	public String edificiosMasCercanos(String location) {
 		int a = graph.searchVertex(location).getAdjList().size();
 		String adjs = "";
 		int i = 0;
-		while(i < a) {
+		while (i < a) {
 			adjs += graph.searchVertex(location).getAdjList().get(i).getValue().getName() + "\n";
 			i++;
 		}
-		
+
 		return adjs;
 	}
-	
+
 	/**
-	 * Devuelve el árbol generador minimo diciendo todas las rutas con su debida distancia usando Kruskal.
-	 * Requerimiento: caminos eficientes que me permite recorrer toda la universidad en el menor tiempo y distancia 
-	 * posible.
+	 * Devuelve el árbol generador minimo diciendo todas las rutas con su debida
+	 * distancia usando Kruskal. Requerimiento: caminos eficientes que me permite
+	 * recorrer toda la universidad en el menor tiempo y distancia posible.
+	 * 
 	 * @return
 	 */
 	public String arbolGeneradorMinimoKruskal() {
 		Double[] pesos = graph.kruskal();
-		String acumulacion = ""; 
-		
-		for(int i = 0; i < pesos.length; i++) {
-			acumulacion += ("Edificio "+graph.searchEdge(pesos[i]).getOrigin().getValue().getName()+" al Edificio "+ 
-					graph.searchEdge(pesos[i]).getEnd().getValue().getName()+ " con una distancia de "+graph.searchEdge(pesos[i]).getValue().
-					getDistance() + " mts"+ "\n");
+		String acumulacion = "";
+
+		for (int i = 0; i < pesos.length; i++) {
+			acumulacion += ("Edificio " + graph.searchEdge(pesos[i]).getOrigin().getValue().getName() + " al Edificio "
+					+ graph.searchEdge(pesos[i]).getEnd().getValue().getName() + " con una distancia de "
+					+ graph.searchEdge(pesos[i]).getValue().getDistance() + " mts" + "\n");
 		}
-		
-		return acumulacion;	
+
+		return acumulacion;
 	}
-	
+
 	/**
-	 * Devuelve la matriz de Warshall con la distancia más corta entre todos los edificios.
+	 * Devuelve la matriz de Warshall con la distancia más corta entre todos los
+	 * edificios.
+	 * 
 	 * @return
 	 */
 	public double[][] shortWayWarshall() {
@@ -261,20 +280,20 @@ public class Icesi {
 //		System.out.println(n.getGraph().getEdges().get(0).getOrigin().getValue().getName());
 //		System.out.println(n.getGraph().getEdges().get(0).getEnd().getValue().getName());
 //		System.out.println(n.getGraph().getVertices().get("M").getPos());
-	    n.dij();
-	    
+		n.dij();
+
 //		System.out.println(n.findShortWayWithDijkstra("A", "CF"));
 //		double bb = n.findShortWayWithDijkstra("A", "CF");
 //		System.out.println("Te tardas aproximadamente "+ n.calcularTiempoDeRecorrido(bb) +" minutos en llegar a tu destino");
 //		System.out.println(n.edificiosMasCercanos("Wonka"));
-		
-		//System.out.println(n.graph.kruskal().length);
+
+		// System.out.println(n.graph.kruskal().length);
 //		for(int i = 0; i < n.graph.kruskal().length; i++) {
 //			System.out.println(n.graph.kruskal()[i]);
 //		}
 //		
 //		System.out.println(n.arbolGeneradorMinimoKruskal());
-		
+
 //		System.out.println(n.showAllBuildingBFS());
 	}
 

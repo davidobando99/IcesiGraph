@@ -28,6 +28,10 @@ public class SampleController {
 	private ImageView map;
 
 	@FXML
+	private ListView<String> listBuildings;
+	@FXML
+	private Button butBuildings;
+	@FXML
 	private Button butRute;
 
 	@FXML
@@ -92,27 +96,27 @@ public class SampleController {
 
 	@FXML
 	private Rectangle G;
-	
+
 	@FXML
-    private Rectangle CF;
+	private Rectangle CF;
 
-    @FXML
-    private Rectangle J;
+	@FXML
+	private Rectangle J;
 
-    @FXML
-    private Rectangle H;
+	@FXML
+	private Rectangle H;
 
-    @FXML
-    private Rectangle K;
+	@FXML
+	private Rectangle K;
 
-    @FXML
-    private Rectangle Wonka;
+	@FXML
+	private Rectangle Wonka;
 
-    @FXML
-    private Rectangle M;
-    
-    @FXML
-    private Rectangle F;
+	@FXML
+	private Rectangle M;
+
+	@FXML
+	private Rectangle F;
 
 	private GraphicsContext gc;
 	private String origin;
@@ -128,7 +132,7 @@ public class SampleController {
 	 * True para inicio False para final
 	 */
 	private boolean path;
-	
+
 	private ArrayList<Rectangle> rectangles;
 
 	public void initialize() {
@@ -139,15 +143,13 @@ public class SampleController {
 		end = "";
 		icesi = new Icesi();
 		verificateMap();
-		rectangles= new ArrayList<Rectangle>();
+		rectangles = new ArrayList<Rectangle>();
 		addRectangles();
-		for(int i=0;i<rectangles.size();i++) {
-			clickBuildings(rectangles.get(i),rectangles.get(i).getId());
+		for (int i = 0; i < rectangles.size(); i++) {
+			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
 		}
 
-		
 		canvas();
-	
 
 	}
 
@@ -156,7 +158,13 @@ public class SampleController {
 
 		tourUniversity();
 	}
-	
+
+	@FXML
+	void butBuildings(ActionEvent event) {
+		fillListBuildings();
+
+	}
+
 	public void addRectangles() {
 		rectangles.add(Coliseo1);
 		rectangles.add(Coliseo2);
@@ -180,26 +188,24 @@ public class SampleController {
 		rectangles.add(L);
 		rectangles.add(M);
 		rectangles.add(N);
-		
+
 	}
-	
+
 	public void way(String origin, String end) {
 
 		String rute = "";
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
-		Building anterior=null;
+		Building anterior = null;
 		for (int i = 0; i < lista.size(); i++) {
-			if(i>0) {
-			anterior=lista.get(i-1);
-			drawRectangle(lista.get(i).getName());
-			drawRoute(getRectangle(anterior.getName()).getLayoutX()
-					,getRectangle(anterior.getName()).getLayoutY(),
-					getRectangle(lista.get(i).getName()).getLayoutX(),
-					getRectangle(lista.get(i).getName()).getLayoutY());
+			if (i > 0) {
+				anterior = lista.get(i - 1);
+				drawRectangle(lista.get(i).getName());
+				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
+						getRectangle(lista.get(i).getName()).getLayoutX(),
+						getRectangle(lista.get(i).getName()).getLayoutY());
 			}
-			
+
 			rute += lista.get(i).getName() + " \n";
-			
 
 		}
 
@@ -282,35 +288,35 @@ public class SampleController {
 		}
 		return building;
 	}
-	
+
 	public void drawRectangle(String name) {
-		for(int i=0;i<rectangles.size();i++) {
-			if(name.equals(rectangles.get(i).getId())) {
+		for (int i = 0; i < rectangles.size(); i++) {
+			if (name.equals(rectangles.get(i).getId())) {
 				rectangles.get(i).setOpacity(1);
 			}
 		}
-		
+
 	}
-	
+
 	public Rectangle getRectangle(String name) {
-		Rectangle rec= null;
-		for(int i=0;i<rectangles.size();i++) {
-			if(name.equals(rectangles.get(i).getId())) {
-				rec=rectangles.get(i);
+		Rectangle rec = null;
+		for (int i = 0; i < rectangles.size(); i++) {
+			if (name.equals(rectangles.get(i).getId())) {
+				rec = rectangles.get(i);
 			}
 		}
 		return rec;
-		
+
 	}
-	
-	public void drawRoute(double X1, double Y1,double X2, double Y2) {
+
+	public void drawRoute(double X1, double Y1, double X2, double Y2) {
 		String origin = X1 + " " + Y1;
 		String end = X2 + " " + Y2;
-		drawLines(origin,end);
-		
+		drawLines(origin, end);
+
 	}
-	
-	private void clickBuildings(Rectangle rec,String name) {
+
+	private void clickBuildings(Rectangle rec, String name) {
 		rec.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -346,15 +352,14 @@ public class SampleController {
 		});
 	}
 
-	
 	public void refresh() {
 		txtRute.setText(" ");
 		icesi.cleanRoute();
 		lineCol1_L.setOpacity(0);
-		for(int i=0;i<rectangles.size();i++) {
+		for (int i = 0; i < rectangles.size(); i++) {
 			rectangles.get(i).setOpacity(0);
 		}
-		
+
 		path = true;
 		origin = "";
 		end = "";
@@ -362,8 +367,6 @@ public class SampleController {
 		endPoint = "";
 		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
 	}
-
-	
 
 	public void tourUniversity() {
 
@@ -375,6 +378,17 @@ public class SampleController {
 		}
 
 		ListTour.setItems(items);
+	}
+
+	public void fillListBuildings() {
+		ObservableList<String> items = FXCollections.observableArrayList();
+		String[] info = icesi.showAllBuildingBFS();
+		for (int i = 0; i < info.length; i++) {
+			items.add(info[i]);
+		}
+
+		listBuildings.setItems(items);
+
 	}
 
 }

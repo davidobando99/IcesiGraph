@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="754.0" prefWidth="1203.0">
                      <children>
-                        <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" onAction="#butRute" text="Mostrar Ruta" textFill="#1a5d9c">
+                        <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" text="Mostrar Ruta" textFill="#1a5d9c">
                            <font>
                               <Font name="System Bold Italic" size="17.0" />
                            </font>
@@ -61,7 +61,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="TOUR PRIMIPARO">
+          <Tab fx:id="tabTour" text="TOUR PRIMIPARO">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -75,6 +75,21 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="BUSQUEDA">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="listBuildings" layoutX="49.0" layoutY="104.0" prefHeight="512.0" prefWidth="291.0" />
+                        <Label layoutX="94.0" layoutY="65.0" text="Edificios de la universidad">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="butBuildings" layoutX="145.0" layoutY="636.0" mnemonicParsing="false" onAction="#butBuildings" text="Ver edificios" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
