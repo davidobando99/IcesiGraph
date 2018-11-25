@@ -175,6 +175,78 @@ public class Icesi {
 			System.out.println(graph.dijkstra("M")[i]);
 		}
 	}
+	
+	/**
+	 * Se encarga de buscar la distancia minima del edificio actual al edificio
+	 * destino DIJKSTRA.
+	 * 
+	 * @param locationActual
+	 * @param destination
+	 * @return
+	 */
+	public double findShortWayWithDijkstra(String locationActual, String destination) {
+		int destino = graph.searchVertex(destination).getPos();
+		double[] roads = graph.dijkstra(locationActual);
+		return roads[destino];
+	}
+
+	/**
+	 * Muestra todos  los edificios mediante el algoritmo BFS.
+	 * @return
+	 */
+	public String showAllBuildingBFS() {
+		String ak = "";
+		ArrayList<String> aux = graph.bfsGraph();
+		for(int i = 0; i < aux.size(); i++) {
+			ak += aux.get(i)+"\n";
+		}
+	
+		return ak;
+	}
+	
+	/**
+	 * Para dar el tiempo de llegada. Se asume que recorro un metro en 0,022 segundos.
+	 * Se le pasa el peso de la arista como parametro.
+	 * @return tiempo
+	 */
+	public double calcularTiempoDeRecorrido(double a) {
+		return a * 0.022;
+	}
+	
+	/**
+	 * Edificios cercanos o adyacentes a mi ubicación actual.
+	 * @return
+	 */
+	public String edificiosMasCercanos(String location) {
+		int a = graph.searchVertex(location).getAdjList().size();
+		String adjs = "";
+		int i = 0;
+		while(i < a) {
+			adjs += graph.searchVertex(location).getAdjList().get(i).getValue().getName() + "\n";
+			i++;
+		}
+		
+		return adjs;
+	}
+	
+	/**
+	 * Devuelve el árbol generador minimo diciendo todas las rutas con su debida distancia usando Kruskal.
+	 * Requerimiento: caminos eficientes que me permite recorrer toda la universidad en el menor tiempo y distancia 
+	 * posible.
+	 * @return
+	 */
+	public String arbolGeneradorMinimoKruskal() {
+		Double[] pesos = graph.kruskal();
+		String acumulacion = ""; 
+		
+		for(int i = 0; i < pesos.length; i++) {
+			acumulacion += ("Edificio "+graph.searchEdge(pesos[i]).getOrigin().getValue().getName()+" al Edificio "+ 
+					graph.searchEdge(pesos[i]).getEnd().getValue().getName()+ " con una distancia de "+graph.searchEdge(pesos[i]).getValue().
+					getDistance() + " mts"+ "\n");
+		}
+		
+		return acumulacion;	
+	}
 
 	public static void main(String[] args) {
 		Icesi n = new Icesi();

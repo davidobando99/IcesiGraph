@@ -488,11 +488,12 @@ public class Graph<V, E> {
 		}
 	}
 
-	public void bfsGraph() {
+	public ArrayList<String> bfsGraph() {
 		Iterator<Map.Entry<String, NodeGraph<V>>> entries = vertices.entrySet().iterator();
 		ArrayList<NodeGraph<V>> vertexList = new ArrayList<NodeGraph<V>>();
 		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
-
+		ArrayList<String> all = new ArrayList<String>();
+		
 		while (entries.hasNext()) {
 			Map.Entry<String, NodeGraph<V>> entry = entries.next();
 			vertexList.add(entry.getValue());
@@ -501,6 +502,7 @@ public class Graph<V, E> {
 		vertexList.get(0).setWasVisited(true);
 		queue.add(vertexList.get(0));
 		displayVertex(vertexList.get(0));
+		all.add(vertexList.get(0).toString());
 		NodeGraph<V> aux2;
 
 		for (; !queue.isEmpty();) {
@@ -508,11 +510,12 @@ public class Graph<V, E> {
 			while ((aux2 = getAdjUnvisitedVertex(aux)) != null) {
 				assignVisit(vertexList, aux2);
 				displayVertex(aux2);
+				all.add(aux2.toString());
 				queue.add(aux2);
 			}
 
 		}
-
+         return all;
 	}
 
 	public void dfsGraph(NodeGraph<V> node) {
@@ -532,6 +535,19 @@ public class Graph<V, E> {
 				}
 			}
 		}
+	}
+	
+	public Edge<V, E> searchEdge(double weight){
+		boolean wasFound = false;
+		Edge<V,E> aux = null;
+		for(int i = 0; i < edges.size() && !wasFound; i++) {
+			if(weight == edges.get(i).getWeight()) {
+				aux = edges.get(i);
+				wasFound = true;
+			}
+		}
+		
+		return aux;
 	}
 
 	public static void main(String[] args) {
