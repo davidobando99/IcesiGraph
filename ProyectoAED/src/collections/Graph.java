@@ -583,12 +583,13 @@ public class Graph<V, E> {
 		
 		
 		
-		 grafo.addVertex("A",A);
+		
 		 grafo.addVertex("B",B);
 		 grafo.addVertex("C",C);
 		 grafo.addVertex("D",D);
 		 grafo.addVertex("E",E);
 		 grafo.addVertex("Z",Z);
+		 grafo.addVertex("A",A);
 		 Double edge1 = 4.0;
 		 Double edge2 = 2.0;
 		 Double edge3 = 1.0;
@@ -629,7 +630,7 @@ public class Graph<V, E> {
 //			 }
 //		 
 //		 }
-		 grafo.print(grafo.dijkstraNodes("A"),grafo.foundPos("C"));
+		 grafo.print(grafo.dijkstraNodes("B"),grafo.foundPos("A"));
 		 for(int i=0;i<grafo.getNodes().size();i++) {
 			 System.out.println(grafo.getNodes().get(i).getName());
 		 }

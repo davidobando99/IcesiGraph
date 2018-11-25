@@ -50,6 +50,13 @@
                         <Rectangle fx:id="Coliseo2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="324.0" layoutY="369.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
                         <Rectangle fx:id="I" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="401.0" layoutY="197.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
                         <Rectangle fx:id="G" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="641.0" layoutY="390.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
+                        <Rectangle fx:id="CF" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="232.0" layoutX="269.0" layoutY="68.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
+                        <Rectangle fx:id="J" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="287.0" layoutY="344.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+                        <Rectangle fx:id="H" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="46.0" layoutX="395.0" layoutY="284.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
+                        <Rectangle fx:id="K" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="585.0" layoutY="300.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+                        <Rectangle fx:id="Wonka" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="529.0" layoutY="187.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+                        <Rectangle fx:id="M" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="104.0" layoutX="739.0" layoutY="104.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+                        <Rectangle fx:id="F" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="545.0" layoutY="603.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
                      </children>
                   </AnchorPane>
             </content>

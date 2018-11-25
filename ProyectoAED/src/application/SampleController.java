@@ -92,6 +92,27 @@ public class SampleController {
 
 	@FXML
 	private Rectangle G;
+	
+	@FXML
+    private Rectangle CF;
+
+    @FXML
+    private Rectangle J;
+
+    @FXML
+    private Rectangle H;
+
+    @FXML
+    private Rectangle K;
+
+    @FXML
+    private Rectangle Wonka;
+
+    @FXML
+    private Rectangle M;
+    
+    @FXML
+    private Rectangle F;
 
 	private GraphicsContext gc;
 	private String origin;
@@ -107,6 +128,8 @@ public class SampleController {
 	 * True para inicio False para final
 	 */
 	private boolean path;
+	
+	private ArrayList<Rectangle> rectangles;
 
 	public void initialize() {
 
@@ -116,23 +139,15 @@ public class SampleController {
 		end = "";
 		icesi = new Icesi();
 		verificateMap();
-		coliseo1Click();
-		LClick();
-		CClick();
-		AClick();
-		BClick();
-		EClick();
-		NClick();
-		samanClick();
-		coliseo2Click();
-		auditoriosClick();
-		bibliotecaClick();
-		bienestarClick();
-		centralClick();
-		GClick();
-		DClick();
+		rectangles= new ArrayList<Rectangle>();
+		addRectangles();
+		for(int i=0;i<rectangles.size();i++) {
+			clickBuildings(rectangles.get(i),rectangles.get(i).getId());
+		}
+
+		
 		canvas();
-		// darL();
+	
 
 	}
 
@@ -140,6 +155,55 @@ public class SampleController {
 	public void butTour(ActionEvent event) {
 
 		tourUniversity();
+	}
+	
+	public void addRectangles() {
+		rectangles.add(Coliseo1);
+		rectangles.add(Coliseo2);
+		rectangles.add(Saman);
+		rectangles.add(Biblioteca);
+		rectangles.add(Auditorios);
+		rectangles.add(Central);
+		rectangles.add(Wonka);
+		rectangles.add(CF);
+		rectangles.add(A);
+		rectangles.add(B);
+		rectangles.add(C);
+		rectangles.add(D);
+		rectangles.add(E);
+		rectangles.add(F);
+		rectangles.add(G);
+		rectangles.add(H);
+		rectangles.add(I);
+		rectangles.add(J);
+		rectangles.add(K);
+		rectangles.add(L);
+		rectangles.add(M);
+		rectangles.add(N);
+		
+	}
+	
+	public void way(String origin, String end) {
+
+		String rute = "";
+		ArrayList<Building> lista = icesi.wayTo(origin, end);
+		Building anterior=null;
+		for (int i = 0; i < lista.size(); i++) {
+			if(i>0) {
+			anterior=lista.get(i-1);
+			drawRectangle(lista.get(i).getName());
+			drawRoute(getRectangle(anterior.getName()).getLayoutX()
+					,getRectangle(anterior.getName()).getLayoutY(),
+					getRectangle(lista.get(i).getName()).getLayoutX(),
+					getRectangle(lista.get(i).getName()).getLayoutY());
+			}
+			
+			rute += lista.get(i).getName() + " \n";
+			
+
+		}
+
+		txtRute.setText(rute);
 	}
 
 	public void canvas() {
@@ -198,12 +262,12 @@ public class SampleController {
 		}
 
 		if (origin != "" && end != "") {
-			if (originPoint != "" && endPoint != "") {
-				if (isLine) {
-					drawLines(originPoint, endPoint);
-				}
-
-			}
+//			if (originPoint != "" && endPoint != "") {
+//				if (isLine) {
+//					drawLines(originPoint, endPoint);
+//				}
+//
+//			}
 			way(origin, end);
 			System.out.println("INICIO " + origin + " FIN " + end);
 		}
@@ -217,6 +281,51 @@ public class SampleController {
 //			System.out.println(building.getName());
 		}
 		return building;
+	}
+	
+	public void drawRectangle(String name) {
+		for(int i=0;i<rectangles.size();i++) {
+			if(name.equals(rectangles.get(i).getId())) {
+				rectangles.get(i).setOpacity(1);
+			}
+		}
+		
+	}
+	
+	public Rectangle getRectangle(String name) {
+		Rectangle rec= null;
+		for(int i=0;i<rectangles.size();i++) {
+			if(name.equals(rectangles.get(i).getId())) {
+				rec=rectangles.get(i);
+			}
+		}
+		return rec;
+		
+	}
+	
+	public void drawRoute(double X1, double Y1,double X2, double Y2) {
+		String origin = X1 + " " + Y1;
+		String end = X2 + " " + Y2;
+		drawLines(origin,end);
+		
+	}
+	
+	private void clickBuildings(Rectangle rec,String name) {
+		rec.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (origin != "" && end != "") {
+					refresh();
+				}
+				rec.setVisible(true);
+				rec.setOpacity(1);
+
+				getBuilding(rec, name);
+				origen(name, rec.getLayoutX(), rec.getLayoutY());
+			}
+
+		});
 	}
 
 	private void coliseo1Click() {
@@ -237,299 +346,15 @@ public class SampleController {
 		});
 	}
 
-	private void coliseo2Click() {
-		Coliseo2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Coliseo2.setVisible(true);
-				Coliseo2.setOpacity(1);
-
-				getBuilding(Coliseo2, "Coliseo2");
-				origen("Coliseo2", Coliseo2.getLayoutX(), Coliseo2.getLayoutY());
-			}
-
-		});
-	}
-
-	private void centralClick() {
-		Central.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Central.setVisible(true);
-				Central.setOpacity(1);
-
-				getBuilding(Central, "Central");
-				origen("Central", Central.getLayoutX(), Central.getLayoutY());
-			}
-
-		});
-	}
-
-	private void samanClick() {
-		Saman.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Saman.setVisible(true);
-				Saman.setOpacity(1);
-
-				getBuilding(Saman, "Saman");
-				origen("Saman", Saman.getLayoutX(), Saman.getLayoutY());
-			}
-
-		});
-	}
-
-	private void auditoriosClick() {
-		Auditorios.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Auditorios.setVisible(true);
-				Auditorios.setOpacity(1);
-
-				getBuilding(Auditorios, "Auditorios");
-				origen("Auditorios", Auditorios.getLayoutX(), Auditorios.getLayoutY());
-			}
-
-		});
-	}
-
-	private void LClick() {
-
-		L.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				L.setVisible(true);
-				L.setOpacity(1);
-
-				lineCol1_L.setOpacity(1);
-				origen("L", L.getLayoutX(), L.getLayoutY());
-				getBuilding(L, "L");
-
-			}
-
-		});
-	}
-
-	private void CClick() {
-		C.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				C.setVisible(true);
-				C.setOpacity(1);
-
-				lineCol1_L.setOpacity(1);
-				origen("C", C.getLayoutX(), C.getLayoutY());
-				getBuilding(C, "C");
-
-			}
-
-		});
-	}
-
-	private void AClick() {
-
-		A.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				A.setVisible(true);
-				A.setOpacity(1);
-
-				origen("A", A.getLayoutX(), A.getLayoutY());
-				getBuilding(A, "A");
-
-			}
-
-		});
-	}
-
-	private void BClick() {
-
-		B.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				B.setVisible(true);
-				B.setOpacity(1);
-
-				origen("B", B.getLayoutX(), B.getLayoutY());
-				getBuilding(B, "B");
-
-			}
-
-		});
-	}
-
-	private void DClick() {
-
-		D.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				D.setVisible(true);
-				D.setOpacity(1);
-
-				origen("D", D.getLayoutX(), D.getLayoutY());
-				getBuilding(D, "D");
-
-			}
-
-		});
-	}
-
-	private void EClick() {
-
-		E.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				E.setVisible(true);
-				E.setOpacity(1);
-
-				origen("E", E.getLayoutX(), E.getLayoutY());
-				getBuilding(E, "E");
-
-			}
-
-		});
-	}
-
-	private void GClick() {
-
-		G.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				G.setVisible(true);
-				G.setOpacity(1);
-
-				origen("G", G.getLayoutX(), G.getLayoutY());
-				getBuilding(G, "G");
-
-			}
-
-		});
-	}
-
-	private void NClick() {
-
-		N.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				N.setVisible(true);
-				N.setOpacity(1);
-
-				origen("N", N.getLayoutX(), N.getLayoutY());
-				getBuilding(N, "N");
-
-			}
-
-		});
-	}
-
-	private void bienestarClick() {
-
-		I.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				I.setVisible(true);
-				I.setOpacity(1);
-
-				origen("Bienestar", I.getLayoutX(), I.getLayoutY());
-				getBuilding(I, "Bienestar");
-
-			}
-
-		});
-	}
-
-	private void bibliotecaClick() {
-
-		Biblioteca.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Biblioteca.setVisible(true);
-				Biblioteca.setOpacity(1);
-
-				origen("Biblioteca", Biblioteca.getLayoutX(), Biblioteca.getLayoutY());
-				getBuilding(Biblioteca, "Biblioteca");
-
-			}
-
-		});
-	}
-
+	
 	public void refresh() {
 		txtRute.setText(" ");
 		icesi.cleanRoute();
 		lineCol1_L.setOpacity(0);
-		C.setOpacity(0);
-		A.setOpacity(0);
-		B.setOpacity(0);
-		D.setOpacity(0);
-		E.setOpacity(0);
-		N.setOpacity(0);
-		G.setOpacity(0);
-		Coliseo1.setOpacity(0);
-		Coliseo2.setOpacity(0);
-		I.setOpacity(0);
-		Auditorios.setOpacity(0);
-		Central.setOpacity(0);
-		Saman.setOpacity(0);
-		Biblioteca.setOpacity(0);
-		L.setOpacity(0);
+		for(int i=0;i<rectangles.size();i++) {
+			rectangles.get(i).setOpacity(0);
+		}
+		
 		path = true;
 		origin = "";
 		end = "";
@@ -538,18 +363,7 @@ public class SampleController {
 		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
 	}
 
-	public void way(String origin, String end) {
-
-		String rute = "";
-		ArrayList<Building> lista = icesi.wayTo(origin, end);
-		for (int i = 0; i < lista.size(); i++) {
-
-			rute += lista.get(i).getName() + " \n";
-
-		}
-
-		txtRute.setText(rute);
-	}
+	
 
 	public void tourUniversity() {
 

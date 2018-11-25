@@ -181,7 +181,7 @@ public class Icesi {
 //		System.out.println(n.getGraph().getEdges().get(0).getOrigin().getValue().getName());
 //		System.out.println(n.getGraph().getEdges().get(0).getEnd().getValue().getName());
 //		System.out.println(n.getGraph().getVertices().get("M").getPos());
-//	    n.dij();
+	    n.dij();
 	}
 
 }
