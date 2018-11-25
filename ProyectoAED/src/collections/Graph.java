@@ -207,19 +207,17 @@ public class Graph<V, E> {
 		int[] previo = new int[ vertices.size() ]; 
 		ArrayList<ArrayList<Integer>> nodes= new ArrayList<ArrayList<Integer>>();
 
-		int i = 0;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
 			if (entry.getKey().equals(key)) {
 				distance[node.getPos()] = 0.0;
 				visited[node.getPos()] = true;
 				
 			} else {
-				distance[i] = INFINITY;
-				visited[i] = false;
+				distance[entry.getValue().getPos()] = INFINITY;
+				visited[entry.getValue().getPos()] = false;
 			}
 			nodes.add(new ArrayList<Integer>());
-			previo[i]=-1;
-			i++;
+			previo[entry.getValue().getPos()]=-1;
 		}
 
 		queue.offer(node);

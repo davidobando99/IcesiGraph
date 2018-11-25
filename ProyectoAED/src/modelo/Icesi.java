@@ -1,8 +1,10 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import collections.Graph;
+import collections.NodeGraph;
 
 public class Icesi {
 
@@ -25,30 +27,57 @@ public class Icesi {
 	public ArrayList<Building> wayTo(String origin, String end) {
 
 		graph.print(graph.dijkstraNodes(origin), graph.foundPos(end));
-
+revisar();
 		return graph.getNodes();
 
 	}
+	public void revisar() {
+		HashMap<String, NodeGraph<Building>>  lista=graph.getVertices();
+		
+		System.out.println(lista.get("B").getPos()+ "pos de B");
+		System.out.println(lista.get("C").getPos()+ "pos de C");
+		System.out.println(lista.get("A").getPos()+ "pos de A");
+		System.out.println(lista.get("D").getPos()+ "pos de D");
+		System.out.println(lista.get("E").getPos()+ "pos de E");
+		System.out.println(lista.get("G").getPos()+ "pos de G");
+	}
+	
 	public void cleanRoute() {
 		graph.getNodes().clear();
 	}
 
 	public void addBuildings() {
+		//0
 		graph.addVertex("A", new Building("A"));
+		//1
 		graph.addVertex("Auditorios", new Building("Auditorios"));
+		//2
 		graph.addVertex("B", new Building("B"));
+		//3
 		graph.addVertex("Biblioteca", new Building("Biblioteca"));
+		//4
 		graph.addVertex("I", new Building("I"));
+		//5
 		graph.addVertex("C", new Building("C"));
+		//6
 		graph.addVertex("CF", new Building("CF"));
+		//7
 		graph.addVertex("Wonka", new Building("Wonka"));
+		//8
 		graph.addVertex("Central", new Building("Central"));
+		//9
 		graph.addVertex("Coliseo1", new Building("Coliseo1"));
+		//10
 		graph.addVertex("Coliseo2", new Building("Coliseo2"));
+		//11
 		graph.addVertex("D", new Building("D"));
+		//12
 		graph.addVertex("E", new Building("E"));
+		//13
 		graph.addVertex("G", new Building("G"));
+		//14
 		graph.addVertex("F", new Building("F"));
+		//15
 		graph.addVertex("H", new Building("H"));
 		graph.addVertex("L", new Building("L"));
 		graph.addVertex("J", new Building("J"));

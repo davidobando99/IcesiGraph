@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +29,9 @@ public class SampleController {
 
 	@FXML
 	private TextArea txtRute;
+	
+	@FXML
+    private ListView<?> ListTour;
 
 	@FXML
 	private Rectangle Coliseo1;
