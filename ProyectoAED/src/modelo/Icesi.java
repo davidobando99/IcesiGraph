@@ -254,6 +254,20 @@ public class Icesi {
 //		System.out.println(n.getGraph().getEdges().get(0).getEnd().getValue().getName());
 //		System.out.println(n.getGraph().getVertices().get("M").getPos());
 	    n.dij();
+	    
+//		System.out.println(n.findShortWayWithDijkstra("A", "CF"));
+//		double bb = n.findShortWayWithDijkstra("A", "CF");
+//		System.out.println("Te tardas aproximadamente "+ n.calcularTiempoDeRecorrido(bb) +" minutos en llegar a tu destino");
+//		System.out.println(n.edificiosMasCercanos("Wonka"));
+		
+		//System.out.println(n.graph.kruskal().length);
+//		for(int i = 0; i < n.graph.kruskal().length; i++) {
+//			System.out.println(n.graph.kruskal()[i]);
+//		}
+//		
+//		System.out.println(n.arbolGeneradorMinimoKruskal());
+		
+//		System.out.println(n.showAllBuildingBFS());
 	}
 
 }
