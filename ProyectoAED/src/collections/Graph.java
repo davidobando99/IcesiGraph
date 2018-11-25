@@ -108,6 +108,17 @@ public class Graph<V, E> {
 		end.addAdjacent(origin);
 
 	}
+	
+	public String foundKey(int pos){
+		String found =null;
+	
+		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
+			if (entry.getValue().getPos()==pos) {
+				found =entry.getKey();
+			}
+	}
+		return found;
+}
 	//
 	// public Edge<V, E> searchEdge(String key) {
 	// return edges.get(key);
@@ -162,16 +173,16 @@ public class Graph<V, E> {
 		double[] distance = new double[vertices.size()];
 		boolean[] visited = new boolean[vertices.size()];
 
-		int i = 0;
-		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
-			if (entry.getKey().equals(key)) {
-				distance[node.getPos()] = 0.0;
-				visited[node.getPos()] = true;
+		
+		for (int i=0;i<vertices.size();i++) {
+			if (foundKey(i).equals(key)) {
+				distance[i] = 0.0;
+				visited[i] = false;
 			} else {
 				distance[i] = INFINITY;
 				visited[i] = false;
 			}
-			i++;
+			
 		}
 
 		queue.offer(node);
@@ -211,18 +222,19 @@ public class Graph<V, E> {
 		int[] previo = new int[ vertices.size() ]; 
 		ArrayList<ArrayList<Integer>> nodes= new ArrayList<ArrayList<Integer>>();
 
-		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
-			if (entry.getKey().equals(key)) {
-				distance[node.getPos()] = 0.0;
-				visited[node.getPos()] = true;
-				
+		for (int i=0;i<vertices.size();i++) {
+			if (foundKey(i).equals(key)) {
+				distance[i] = 0.0;
+				visited[i] = false;
 			} else {
-				distance[entry.getValue().getPos()] = INFINITY;
-				visited[entry.getValue().getPos()] = false;
+				distance[i] = INFINITY;
+				visited[i] = false;
 			}
 			nodes.add(new ArrayList<Integer>());
-			previo[entry.getValue().getPos()]=-1;
+			previo[i]=-1;
+			
 		}
+		
 
 		queue.offer(node);
 
@@ -252,6 +264,56 @@ public class Graph<V, E> {
 		
 		
 	}
+//	public int[] dijkstraNodes(String key) {
+//		NodeGraph<V> node = searchVertex(key);
+//		// System.out.println(node.getValue()+ "value node");
+//		Queue<NodeGraph<V>> queue = new LinkedList<NodeGraph<V>>();
+//		double[] distance = new double[vertices.size()];
+//		boolean[] visited = new boolean[vertices.size()];
+//		int[] previo = new int[ vertices.size() ]; 
+//		ArrayList<ArrayList<Integer>> nodes= new ArrayList<ArrayList<Integer>>();
+//
+//		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
+//			if (entry.getKey().equals(key)) {
+//				distance[node.getPos()] = 0.0;
+//				visited[node.getPos()] = true;
+//				
+//			} else {
+//				distance[entry.getValue().getPos()] = INFINITY;
+//				visited[entry.getValue().getPos()] = false;
+//			}
+//			nodes.add(new ArrayList<Integer>());
+//			previo[entry.getValue().getPos()]=-1;
+//		}
+//
+//		queue.offer(node);
+//
+//		while (!queue.isEmpty()) {
+//			NodeGraph<V> actual = queue.peek();
+//			queue.poll();
+//			int posActual = actual.getPos();
+//
+//			visited[posActual] = true;
+//			for (int j = 0; j < actual.getAdjList().size(); j++) {
+//				NodeGraph<V> adyacent = actual.getAdjList().get(j);
+//				double peso = adjacentsWeight(actual, adyacent);
+//				int posAdj = adyacent.getPos();
+//
+//				if (distance[posActual] + peso < distance[posAdj]) {
+//					distance[posAdj] = distance[posActual] + peso;
+//					nodes.get(posAdj).add(posActual);
+//					previo[ posAdj ] = posActual; 
+//					queue.offer(adyacent);
+//
+//				}
+//
+//			}
+//
+//		}
+//		return previo;
+//		
+//		
+//	}
 	public void print(int[] previo, int posEnd) {
 		// ArrayList<V> nodes= new  ArrayList<V>();
         if( previo[ posEnd ] != -1 ) {  
@@ -438,6 +500,7 @@ public class Graph<V, E> {
 		Double[] minimunTree = new Double[vertices.size() - 1];
 		int[] parent = new int[vertices.size()];
 		makeSet(parent, vertices.size());
+		//ArrayList<Edge<V, E>> routes=(ArrayList<Edge<V, E>>) edges.clone();
 		ArrayList<Edge<V, E>> edgesSorted = sortEdges(edges);
 		for (int i = 0; i < edgesSorted.size(); i++) {
 			int origin = edgesSorted.get(i).getOrigin().getPos();
@@ -599,9 +662,8 @@ public class Graph<V, E> {
 		
 		
 		
-		
-		 grafo.addVertex("B",B);
 		 grafo.addVertex("C",C);
+		 grafo.addVertex("B",B);
 		 grafo.addVertex("D",D);
 		 grafo.addVertex("E",E);
 		 grafo.addVertex("Z",Z);
@@ -615,16 +677,18 @@ public class Graph<V, E> {
 		 Double edge7 = 2.0;
 		 Double edge8 = 6.0;
 		 Double edge9 = 3.0;
-		
+		 grafo.insertEdge(edge7,  "E","D", edge7);
+		 grafo.insertEdge(edge3,  "C","B", edge3);
+		 grafo.insertEdge(edge9,  "E","Z", edge9);
 		 grafo.insertEdge(edge1, "A","B", edge1);
 		 grafo.insertEdge(edge2, "A","C", edge2);
-		 grafo.insertEdge(edge3,  "C","B", edge3);
+		
 		 grafo.insertEdge(edge4, "B","D", edge4);
 		 grafo.insertEdge(edge5,  "C","D", edge5);
 		 grafo.insertEdge(edge6,  "C","E", edge6);
-		 grafo.insertEdge(edge7,  "E","D", edge7);
+		 
 		 grafo.insertEdge(edge8,  "D","Z", edge8);
-		 grafo.insertEdge(edge9,  "E","Z", edge9);
+		
 		
 		 
 		// for(int i=0;i<grafo.getWeightMatrix().length;i++) {
@@ -646,12 +710,20 @@ public class Graph<V, E> {
 //			 }
 //		 
 //		 }
-		 grafo.print(grafo.dijkstraNodes("B"),grafo.foundPos("A"));
+		 grafo.print(grafo.dijkstraNodes("Z"),grafo.foundPos("A"));
 		 for(int i=0;i<grafo.getNodes().size();i++) {
 			 System.out.println(grafo.getNodes().get(i).getName());
 		 }
-		 
-		 
+		 System.out.println("DISTANCIAS");
+		 for(int i=0;i<grafo.dijkstra("A").length;i++) {
+			 System.out.println(grafo.dijkstra("A")[i]);
+		 }
+		
+
+//		 for (Map.Entry<String, NodeGraph<Building>> entry : grafo.getVertices().entrySet()) {
+//				System.out.println(entry.getValue().getPos());
+//				System.out.println(entry.getKey());
+//		 }
 		 
 		 
 		//
