@@ -247,6 +247,14 @@ public class Icesi {
 		
 		return acumulacion;	
 	}
+	
+	/**
+	 * Devuelve la matriz de Warshall con la distancia más corta entre todos los edificios.
+	 * @return
+	 */
+	public double[][] shortWayWarshall() {
+		return graph.floydWarshall();
+	}
 
 	public static void main(String[] args) {
 		Icesi n = new Icesi();
