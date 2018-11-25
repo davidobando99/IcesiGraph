@@ -18,5 +18,8 @@ public class Building {
 		this.name = name;
 	}
 	
+	public String toString() {
+		return name;
+	}
 	
 }
