@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="754.0" prefWidth="1203.0">
                      <children>
-                        <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" text="Mostrar Ruta" textFill="#1a5d9c">
+                        <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" onAction="#butRute" text="Mostrar Ruta" textFill="#1a5d9c">
                            <font>
                               <Font name="System Bold Italic" size="17.0" />
                            </font>
@@ -66,7 +66,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ListView fx:id="ListTour" layoutX="72.0" layoutY="106.0" prefHeight="490.0" prefWidth="338.0" />
-                        <Label layoutX="134.0" layoutY="49.0" prefHeight="47.0" prefWidth="215.0" text="Recorrido del la universidad" textAlignment="CENTER">
+                        <Label fx:id="labRecorrido" layoutX="134.0" layoutY="49.0" prefHeight="47.0" prefWidth="215.0" text="Recorrido del la universidad" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
