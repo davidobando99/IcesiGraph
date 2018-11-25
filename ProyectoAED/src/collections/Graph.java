@@ -9,10 +9,12 @@ public class Graph<V, E> {
 	public static final int SIZE = 10001; // maximo numero de vértices
 	public static final double INFINITY = 1 << 30;
 	public static final int AMOUNT = 100;
+	public static final int AMOUNT1 = 22;
 	private int[][] adjacentsMatrix;
 	private double[][] weightMatrix;
 	private HashMap<String, NodeGraph<V>> vertices;
 	private ArrayList<Edge<V, E>> edges;
+	private int [] nodesPrim;
 	private ArrayList<V> nodes;
 
 	public Graph() {
@@ -21,6 +23,7 @@ public class Graph<V, E> {
 		edges = new ArrayList<Edge<V, E>>();
 		adjacentsMatrix = new int[AMOUNT][AMOUNT];
 		weightMatrix = new double[AMOUNT][AMOUNT];
+		nodesPrim= new int[AMOUNT1];
 
 		inicializeMatrix();
 	}
@@ -68,6 +71,7 @@ public class Graph<V, E> {
 	public NodeGraph<V> searchVertex(String key) {
 		return vertices.get(key);
 	}
+	
 
 	public void addVertex(String key, V newVertex) {
 		if (vertices.isEmpty()) { // Si la tabla esta vacia que la posicion en la matriz sea (0,0)
@@ -336,7 +340,7 @@ public class Graph<V, E> {
 		for (int i = 0; i < key.length; i++) {
 
 			if (key[i] < min && !visits[i]) {
-
+//				System.out.println(key[i]+"ME BITCH");
 				min = key[i];
 
 				val = i;
@@ -349,17 +353,18 @@ public class Graph<V, E> {
 	public int[] primMTS() {
 
 		NodeGraph<V> node = minEdge().getOrigin();
-		System.out.println(node.getValue() + "PRIM");
+//		System.out.println(node.getValue() + "PRIM");
 		int key = node.getPos();
 
-		double dist[] = new double[AMOUNT];
-		int order[] = new int[AMOUNT];
-		String parent[] = new String[AMOUNT];
-		boolean[] visits = new boolean[AMOUNT];
+		double dist[] = new double[AMOUNT1];
+		int order[] = new int[AMOUNT1];
+		String parent[] = new String[AMOUNT1];
+		boolean[] visits = new boolean[AMOUNT1];
 		for (int i = 0; i < visits.length; i++) {
 			dist[i] = INFINITY;
 			visits[i] = false;
 		}
+		
 
 		dist[key] = 0.0;
 		parent[key] = key + "";

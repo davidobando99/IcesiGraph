@@ -64,6 +64,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
+                        <Button fx:id="butTour" layoutX="175.0" layoutY="612.0" mnemonicParsing="false" onAction="#butTour" prefHeight="28.0" prefWidth="113.0" text="Ver Ruta" />
                      </children></AnchorPane>
             </content>
           </Tab>

@@ -2,6 +2,9 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -31,7 +34,10 @@ public class SampleController {
 	private TextArea txtRute;
 	
 	@FXML
-    private ListView<?> ListTour;
+    private Button butTour;
+	
+	@FXML
+    private ListView<String> ListTour;
 
 	@FXML
 	private Rectangle Coliseo1;
@@ -129,6 +135,11 @@ public class SampleController {
 		// darL();
 
 	}
+	 @FXML
+	  public  void butTour(ActionEvent event) {
+		 
+		 tourUniversity();
+	    }
 
 	public void canvas() {
 		// Image image = new
@@ -533,11 +544,21 @@ public class SampleController {
 		for (int i = 0; i < lista.size(); i++) {
 
 			rute+=lista.get(i).getName() + " \n";
-			System.out.println(lista.get(i).getName());
 
 		}
 
 		txtRute.setText(rute);
+	}
+	public void tourUniversity() {
+		
+		ObservableList<String> items = FXCollections.observableArrayList();
+		
+		String[] info=icesi.primMTS();
+		for (int i = 0; i < info.length; i++) {
+			items.add(info[i]);
+		}
+
+		ListTour.setItems(items);
 	}
 
 }
