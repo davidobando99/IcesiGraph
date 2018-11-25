@@ -77,7 +77,9 @@ public class NodeGraph<V> {
 		this.wasVisited = wasVisited;
 	}
 
-	
+	public String toString() {
+		return value +"";
+	}
 	
 	
 	
