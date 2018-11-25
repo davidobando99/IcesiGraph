@@ -32,12 +32,12 @@ public class SampleController {
 
 	@FXML
 	private TextArea txtRute;
-	
+
 	@FXML
-    private Button butTour;
-	
+	private Button butTour;
+
 	@FXML
-    private ListView<String> ListTour;
+	private ListView<String> ListTour;
 
 	@FXML
 	private Rectangle Coliseo1;
@@ -135,11 +135,12 @@ public class SampleController {
 		// darL();
 
 	}
-	 @FXML
-	  public  void butTour(ActionEvent event) {
-		 
-		 tourUniversity();
-	    }
+
+	@FXML
+	public void butTour(ActionEvent event) {
+
+		tourUniversity();
+	}
 
 	public void canvas() {
 		// Image image = new
@@ -538,22 +539,23 @@ public class SampleController {
 	}
 
 	public void way(String origin, String end) {
-		
-		String rute="";
+
+		String rute = "";
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		for (int i = 0; i < lista.size(); i++) {
 
-			rute+=lista.get(i).getName() + " \n";
+			rute += lista.get(i).getName() + " \n";
 
 		}
 
 		txtRute.setText(rute);
 	}
+
 	public void tourUniversity() {
-		
+
 		ObservableList<String> items = FXCollections.observableArrayList();
-		
-		String[] info=icesi.primMTS();
+
+		String[] info = icesi.primMTS();
 		for (int i = 0; i < info.length; i++) {
 			items.add(info[i]);
 		}

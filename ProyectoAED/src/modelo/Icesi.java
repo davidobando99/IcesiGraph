@@ -9,11 +9,11 @@ import collections.NodeGraph;
 public class Icesi {
 
 	private Graph<Building, Route> graph;
-	private String [] route;
+	private String[] route;
 
 	public Icesi() {
 		graph = new Graph<Building, Route>();
-		route=new String[22];
+		route = new String[22];
 		addBuildings();
 		addRoutes();
 	}
@@ -29,100 +29,95 @@ public class Icesi {
 	public ArrayList<Building> wayTo(String origin, String end) {
 
 		graph.print(graph.dijkstraNodes(origin), graph.foundPos(end));
-//revisar();
 		return graph.getNodes();
 
 	}
+
 	public void revisar() {
-		HashMap<String, NodeGraph<Building>>  lista=graph.getVertices();
-		
-		System.out.println(lista.get("B").getPos()+ "pos de B");
-		System.out.println(lista.get("C").getPos()+ "pos de C");
-		System.out.println(lista.get("A").getPos()+ "pos de A");
-		System.out.println(lista.get("D").getPos()+ "pos de D");
-		System.out.println(lista.get("E").getPos()+ "pos de E");
-		System.out.println(lista.get("G").getPos()+ "pos de G");
+		HashMap<String, NodeGraph<Building>> lista = graph.getVertices();
+
 	}
+
 	public String[] primMTS() {
-		int [] info= graph.primMTS();
-		String [] way=new String[info.length];
+		int[] info = graph.primMTS();
+		String[] way = new String[info.length];
 		for (int i = 0; i < info.length; i++) {
-			way[i]=route[info[i]];
+			way[i] = route[info[i]];
 		}
 		return way;
 	}
-	
+
 	public void cleanRoute() {
 		graph.getNodes().clear();
 	}
 
 	public void addBuildings() {
-		//0
+		// 0
 		graph.addVertex("A", new Building("A"));
-		route[0]="A";
-		//1
+		route[0] = "A";
+		// 1
 		graph.addVertex("Auditorios", new Building("Auditorios"));
-		route[1]="Auditorios";
-		//2
+		route[1] = "Auditorios";
+		// 2
 		graph.addVertex("B", new Building("B"));
-		route[2]="B";
-		//3
+		route[2] = "B";
+		// 3
 		graph.addVertex("Biblioteca", new Building("Biblioteca"));
-		route[3]="Biblioteca";
-		//4
+		route[3] = "Biblioteca";
+		// 4
 		graph.addVertex("I", new Building("I"));
-		route[4]="I";
-		//5
+		route[4] = "I";
+		// 5
 		graph.addVertex("C", new Building("C"));
-		route[5]="C";
-		//6
+		route[5] = "C";
+		// 6
 		graph.addVertex("CF", new Building("CF"));
-		route[6]="CF";
-		//7
+		route[6] = "CF";
+		// 7
 		graph.addVertex("Wonka", new Building("Wonka"));
-		route[7]="Wonka";
-		//8
+		route[7] = "Wonka";
+		// 8
 		graph.addVertex("Central", new Building("Central"));
-		route[8]="Central";
-		//9
+		route[8] = "Central";
+		// 9
 		graph.addVertex("Coliseo1", new Building("Coliseo1"));
-		route[9]="Coliseo1";
-		//10
+		route[9] = "Coliseo1";
+		// 10
 		graph.addVertex("Coliseo2", new Building("Coliseo2"));
-		route[10]="Coliseo2";
-		//11
+		route[10] = "Coliseo2";
+		// 11
 		graph.addVertex("D", new Building("D"));
-		route[11]="D";
-		//12
+		route[11] = "D";
+		// 12
 		graph.addVertex("E", new Building("E"));
-		route[12]="E";
-		//13
+		route[12] = "E";
+		// 13
 		graph.addVertex("G", new Building("G"));
-		route[13]="G";
-		//14
+		route[13] = "G";
+		// 14
 		graph.addVertex("F", new Building("F"));
-		route[14]="F";
-		//15
+		route[14] = "F";
+		// 15
 		graph.addVertex("H", new Building("H"));
-		route[15]="H";
-		//16
+		route[15] = "H";
+		// 16
 		graph.addVertex("L", new Building("L"));
-		route[16]="L";
-		//17
+		route[16] = "L";
+		// 17
 		graph.addVertex("J", new Building("J"));
-		route[17]="J";
-		//18
+		route[17] = "J";
+		// 18
 		graph.addVertex("K", new Building("K"));
-		route[18]="K";
-		//19
+		route[18] = "K";
+		// 19
 		graph.addVertex("M", new Building("M"));
-		route[19]="M";
-		//20
+		route[19] = "M";
+		// 20
 		graph.addVertex("N", new Building("N"));
-		route[20]="N";
-		//21
+		route[20] = "N";
+		// 21
 		graph.addVertex("Saman", new Building("Saman"));
-		route[21]="Saman";
+		route[21] = "Saman";
 
 	}
 
@@ -168,7 +163,6 @@ public class Icesi {
 
 	}
 
-	
 	public void dijkstra() {
 		graph.print(graph.dijkstraNodes("M"), graph.foundPos("Central"));
 		for (int i = 0; i < graph.getNodes().size(); i++) {
