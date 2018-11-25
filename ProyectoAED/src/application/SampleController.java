@@ -127,7 +127,8 @@ public class SampleController {
 
 	private String endPoint;
 
-	private boolean isLine;
+	private boolean isMouseIn;
+	
 	/**
 	 * True para inicio False para final
 	 */
@@ -137,7 +138,7 @@ public class SampleController {
 
 	public void initialize() {
 
-		isLine = true;
+		isMouseIn = false;
 		path = true;
 		origin = "";
 		end = "";
@@ -147,6 +148,7 @@ public class SampleController {
 		addRectangles();
 		for (int i = 0; i < rectangles.size(); i++) {
 			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
+			showText(rectangles.get(i), rectangles.get(i).getId());
 		}
 
 		canvas();
@@ -199,7 +201,7 @@ public class SampleController {
 		for (int i = 0; i < lista.size(); i++) {
 			if (i > 0) {
 				anterior = lista.get(i - 1);
-				drawRectangle(lista.get(i).getName());
+				//drawRectangle(lista.get(i).getName());
 				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
 						getRectangle(lista.get(i).getName()).getLayoutX(),
 						getRectangle(lista.get(i).getName()).getLayoutY());
@@ -316,8 +318,26 @@ public class SampleController {
 
 	}
 
+	
+	private void showText(Rectangle rec,String name) {
+    rec.setOnMouseMoved(new EventHandler<MouseEvent>() {
+			
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (origin != "" && end != "") {
+					refresh();
+				}
+				gc.fillText(name, rec.getLayoutX(), rec.getLayoutY());
+				
+			}
+
+		});
+	}
 	private void clickBuildings(Rectangle rec, String name) {
+		//rec.setOnMouseMoved(arg0);
 		rec.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
 
 			@Override
 			public void handle(MouseEvent event) {
