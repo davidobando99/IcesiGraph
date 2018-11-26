@@ -1,11 +1,21 @@
 package collections;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 import java.util.*;
 
 import modelo.Building;
 
-public class Graph<V, E> {
+public class Graph<V, E> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE = 10001; // maximo numero de vértices
 	public static final double INFINITY = 1 << 30;
 	public static final int AMOUNT = 100;
@@ -14,7 +24,6 @@ public class Graph<V, E> {
 	private double[][] weightMatrix;
 	private HashMap<String, NodeGraph<V>> vertices;
 	private ArrayList<Edge<V, E>> edges;
-	private int [] nodesPrim;
 	private ArrayList<V> nodes;
 
 	public Graph() {
@@ -23,7 +32,6 @@ public class Graph<V, E> {
 		edges = new ArrayList<Edge<V, E>>();
 		adjacentsMatrix = new int[AMOUNT][AMOUNT];
 		weightMatrix = new double[AMOUNT][AMOUNT];
-		nodesPrim= new int[AMOUNT1];
 
 		inicializeMatrix();
 	}
@@ -612,6 +620,7 @@ public class Graph<V, E> {
 		
 		return aux;
 	}
+	
 
 	public static void main(String[] args) {
 		// Graph<String, Double> grafo= new Graph<String, Double>();

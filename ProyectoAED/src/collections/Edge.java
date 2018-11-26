@@ -1,8 +1,13 @@
 package collections;
 
+import java.io.Serializable;
 
-public class Edge<V,E> implements Comparable<Edge<V,E>>{
+public class Edge<V,E> implements Comparable<Edge<V,E>>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private E value;
 	private NodeGraph<V> origin;
 	private NodeGraph<V> end;

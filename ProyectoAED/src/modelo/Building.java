@@ -1,6 +1,12 @@
 package modelo;
 
-public class Building {
+import java.io.Serializable;
+
+public class Building implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 
 	

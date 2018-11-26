@@ -1,7 +1,13 @@
 package modelo;
 
-public class Route {
+import java.io.Serializable;
+
+public class Route implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double distance;
 	
 	public Route(double distance) {

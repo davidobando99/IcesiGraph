@@ -1,10 +1,15 @@
 package collections;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class NodeGraph<V> {
+public class NodeGraph<V>implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private V value;
 	private int posX;
 	private ArrayList<NodeGraph<V>> adjList;

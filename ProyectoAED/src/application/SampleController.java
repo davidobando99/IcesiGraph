@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
@@ -146,7 +147,7 @@ public class SampleController {
 
 	private ArrayList<Rectangle> rectangles;
 
-	public void initialize() {
+	public void initialize() throws Exception {
 
 		isMouseIn = true;
 		path = true;
