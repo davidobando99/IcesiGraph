@@ -168,6 +168,16 @@ public void dijkstraWe() {
 		graph.insertEdge(new Route(40), "CF", "I", 40);
 
 	}
+	
+	public void addRoute(double peso, String origin, String end) throws NullPointerException, IOException{
+		if(graph.searchVertex(origin)!=null&&graph.searchVertex(end)!=null) {
+		graph.insertEdge(new Route(peso), origin, end, peso);
+		serializar();
+	}
+		else {
+			throw new NullPointerException();
+		}
+	}
 
 	public void dijkstra() {
 		graph.print(graph.dijkstraNodes("M"), graph.foundPos("Central"));
@@ -225,11 +235,9 @@ public String[] distancesDijkstras(String origin, String end) {
 		int posActual=0;
 		int distance=0;
 		for (int i = 0; i < route.length; i++) {
-//			if(i>0) {
-//				posAnterior= graph.searchVertex(nodes.get(i-1).getName()).getPos();
-//			}
+
 			posActual= graph.searchVertex(nodes.get(i).getName()).getPos();
-			//distance=(int) (distances[posActual]-distances[posAnterior]);
+			
 			route[i]=(int)(distances[posActual])+"";
 		}
 		return route;
