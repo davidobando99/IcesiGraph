@@ -217,7 +217,6 @@ class GraphTest {
 		assertTrue(krus[1]==8.0);
 		assertTrue(krus[2]==9.0);
 		assertTrue(krus[3]==12.0);
-//		assertTrue(krus[4]==8.0);
 		
 	}
 
