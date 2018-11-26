@@ -198,7 +198,6 @@ class GraphTest {
 
 		setUpTwo();
 
-//		String posVertex = "1";
 		int[] prim = graph.primMTS();
 
 		assertTrue(prim[0] == 1);
