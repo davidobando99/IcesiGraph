@@ -20,6 +20,8 @@ public class Icesi {
 		graph = new Graph<Building, Route>();
 		route = new String[22];
 		addBuildings();
+//		addRoutes();
+//		serializar();
 		deserializar();
 	}
 
@@ -56,55 +58,79 @@ public void dijkstraWe() {
 
 	public void addBuildings() {
 		// 0
-		route[0] = "A";
-		// 1
-		route[1] = "Auditorios";
-		// 2
-		route[2] = "B";
-		// 3
-		route[3] = "Biblioteca";
-		// 4
-		route[4] = "I";
-		// 5
-		route[5] = "C";
-		// 6
-		route[6] = "CF";
-		// 7
-		route[7] = "Wonka";
-		// 8
-		route[8] = "Central";
-		// 9
-		route[9] = "Coliseo1";
-		// 10
-		route[10] = "Coliseo2";
-		// 11
-		route[11] = "D";
-		// 12
-		route[12] = "E";
-		// 13
-		route[13] = "G";
-		// 14
-		route[14] = "F";
-		// 15
-		route[15] = "H";
-		// 16
-		route[16] = "L";
-		// 17
-		route[17] = "J";
-		// 18
-		route[18] = "K";
-		// 19
-		route[19] = "M";
-		// 20
-		route[20] = "N";
-		// 21
-		route[21] = "Saman";
+//				graph.addVertex("A", new Building("A"));
+				route[0] = "A";
+				// 1
+//				graph.addVertex("Auditorios", new Building("Auditorios"));
+				route[1] = "Auditorios";
+				// 2
+//				graph.addVertex("B", new Building("B"));
+				route[2] = "B";
+				// 3
+//				graph.addVertex("Biblioteca", new Building("Biblioteca"));
+				route[3] = "Biblioteca";
+				// 4
+//				graph.addVertex("I", new Building("I"));
+				route[4] = "I";
+				// 5
+//				graph.addVertex("C", new Building("C"));
+				route[5] = "C";
+				// 6
+//				graph.addVertex("CF", new Building("CF"));
+				route[6] = "CF";
+				// 7
+//				graph.addVertex("Wonka", new Building("Wonka"));
+				route[7] = "Wonka";
+				// 8
+//				graph.addVertex("Central", new Building("Central"));
+				route[8] = "Central";
+				// 9
+//				graph.addVertex("Coliseo1", new Building("Coliseo1"));
+				route[9] = "Coliseo1";
+				// 10
+//				graph.addVertex("Coliseo2", new Building("Coliseo2"));
+				route[10] = "Coliseo2";
+				// 11
+//				graph.addVertex("D", new Building("D"));
+				route[11] = "D";
+				// 12
+//				graph.addVertex("E", new Building("E"));
+				route[12] = "E";
+				// 13
+//				graph.addVertex("G", new Building("G"));
+				route[13] = "G";
+				// 14
+//				graph.addVertex("F", new Building("F"));
+				route[14] = "F";
+				// 15
+//				graph.addVertex("H", new Building("H"));
+				route[15] = "H";
+				// 16
+//				graph.addVertex("L", new Building("L"));
+				route[16] = "L";
+				// 17
+//				graph.addVertex("J", new Building("J"));
+				route[17] = "J";
+				// 18
+//				graph.addVertex("K", new Building("K"));
+				route[18] = "K";
+				// 19
+//				graph.addVertex("M", new Building("M"));
+				route[19] = "M";
+				// 20
+//				graph.addVertex("N", new Building("N"));
+				route[20] = "N";
+				// 21
+//				graph.addVertex("Saman", new Building("Saman"));
+				route[21] = "Saman";
+
 
 	}
 
 	public void addRoutes() {
 		graph.insertEdge(new Route(26), "A", "Biblioteca", 26);
 		graph.insertEdge(new Route(13.4), "A", "Saman", 13.4);
+		graph.insertEdge(new Route(4), "M", "A", 4);
 		graph.insertEdge(new Route(48.5), "B", "C", 48.5);
 		graph.insertEdge(new Route(26), "B", "Biblioteca", 26);
 		graph.insertEdge(new Route(54.2), "B", "Wonka", 54.2);
@@ -120,7 +146,6 @@ public void dijkstraWe() {
 		graph.insertEdge(new Route(19.6), "H", "CF", 19.6);
 		graph.insertEdge(new Route(151.4), "I", "Central", 151.4);
 		graph.insertEdge(new Route(24.6), "J", "H", 24.6);
-		graph.insertEdge(new Route(48), "J", "L", 48);
 		graph.insertEdge(new Route(50.3), "J", "N", 50.3);
 		graph.insertEdge(new Route(34.7), "J", "Coliseo2", 34.7);
 		graph.insertEdge(new Route(3.9), "J", "CF", 3.9);
