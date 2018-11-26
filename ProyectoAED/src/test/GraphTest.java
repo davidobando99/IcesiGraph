@@ -201,14 +201,24 @@ class GraphTest {
 		
 		assertTrue(prim[0]==1);
 		assertTrue(prim[1]==3);
-//		assertTrue(prim[0]==1);
-//		assertTrue(prim[0]==1);
-//		assertTrue(prim[0]==1);
-//		assertTrue(prim[0]==1);
-//		assertTrue(prim[0]==1);
+		assertTrue(prim[2]==4);
+		assertTrue(prim[3]==0);
+		assertTrue(prim[4]==2);
 
 		
 
+	}
+	@Test
+	public void kruskal() {
+		setUpTwo();
+		Double[] krus=graph.kruskal();
+		
+		assertTrue(krus[0]==7.0);
+		assertTrue(krus[1]==8.0);
+		assertTrue(krus[2]==9.0);
+		assertTrue(krus[3]==12.0);
+//		assertTrue(krus[4]==8.0);
+		
 	}
 
 }
