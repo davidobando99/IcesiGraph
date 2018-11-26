@@ -212,26 +212,24 @@ public class SampleController {
 	public void way(String origin, String end) {
 
 		String rute = "";
-		String [] info1= icesi.dij(origin);
+		//String [] info1= icesi.dij(origin);
 		String[] distances= icesi.distancesDijkstra(origin,end);
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		Building anterior = null;
-		for (int i = 0; i < lista.size(); i++) {
+		for (int i = 0; i < distances.length; i++) {
 			if (i > 0) {
 				anterior = lista.get(i - 1);
-				//drawRectangle(lista.get(i).getName());
 				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
 						getRectangle(lista.get(i).getName()).getLayoutX(),
 						getRectangle(lista.get(i).getName()).getLayoutY());
-//				gc.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 5.0));
-//				gc.setStroke(Color.WHITE);
+//				
 				
 			}
 			gc2.strokeText(distances[i], getRectangle(lista.get(i).getName()).getLayoutX()+30,
 					getRectangle(lista.get(i).getName()).getLayoutY()+30);
 
-			rute += lista.get(i).getName() +" , "+ info1[i]+ " \n";
-
+			//rute += lista.get(i).getName() +" , "+ info1[i]+ " \n";
+			rute += lista.get(i).getName() + " \n";
 		}
 
 		txtRute.setText(rute);

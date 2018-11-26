@@ -153,20 +153,24 @@ public void dijkstraWe() {
 
 	
 	public String[] distancesDijkstra(String origin, String end) {
-		String[] route=new String[wayTo(origin,end).size()];
-		for (int i = 0; i < wayTo(origin,end).size(); i++) {
+		
+		ArrayList<Building> nodes =wayTo(origin,end);
+		double[] distances=graph.dijkstra(origin);
+		String[] route=new String[nodes.size()];
+		for (int i = 0; i < route.length; i++) {
 			
-			int pos= graph.searchVertex(wayTo(origin,end).get(i).getName()).getPos();
-			System.out.println(pos+"name "+wayTo(origin,end).get(i).getName()+"distance "+graph.dijkstra(origin)[pos]);
-			route[i]=(int)(graph.dijkstra(origin)[pos])+"";
-			
+			int pos= graph.searchVertex(nodes.get(i).getName()).getPos();
+			System.out.println(pos+"name "+nodes.get(i).getName()+"distance "+distances[pos]);
+			route[i]=(int)(distances[pos])+"";
+			System.out.println("# dijkstra "+distances.length);
+			System.out.println("# nodes "+nodes.size());
 		}
 		return route;
 	}
 	
 	public String[] dij(String origin) {
 		String[] route=new String[graph.dijkstra(origin).length];
-		for (int i = 0; i < graph.dijkstra(origin).length; i++) {
+		for (int i = 0; i < route.length; i++) {
 			route[i]="Distancia: "+(int)graph.dijkstra(origin)[i];
 		}
 		return route;
