@@ -212,7 +212,8 @@ public class SampleController {
 	public void way(String origin, String end) {
 
 		String rute = "";
-		String [] info1= icesi.dij();
+		String [] info1= icesi.dij(origin);
+		String[] distances= icesi.distancesDijkstra(origin,end);
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		Building anterior = null;
 		for (int i = 0; i < lista.size(); i++) {
@@ -222,7 +223,12 @@ public class SampleController {
 				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
 						getRectangle(lista.get(i).getName()).getLayoutX(),
 						getRectangle(lista.get(i).getName()).getLayoutY());
+//				gc.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 5.0));
+//				gc.setStroke(Color.WHITE);
+				
 			}
+			gc2.strokeText(distances[i], getRectangle(lista.get(i).getName()).getLayoutX()+30,
+					getRectangle(lista.get(i).getName()).getLayoutY()+30);
 
 			rute += lista.get(i).getName() +" , "+ info1[i]+ " \n";
 
@@ -259,6 +265,7 @@ public class SampleController {
 		gc.appendSVGPath("M " + origin + " L " + end);
 		gc.closePath();
 		gc.stroke();
+		
 	}
 
 	public void verificateMap() {
@@ -344,6 +351,7 @@ public class SampleController {
 		String origin = X1 + " " + Y1;
 		String end = X2 + " " + Y2;
 		drawLines(origin, end);
+		
 
 	}
 
