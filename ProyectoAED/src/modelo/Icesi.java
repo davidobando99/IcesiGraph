@@ -123,6 +123,7 @@ public void dijkstraWe() {
 				// 21
 //				graph.addVertex("Saman", new Building("Saman"));
 				route[21] = "Saman";
+				
 
 
 	}
