@@ -367,10 +367,10 @@ public class Graph<V, E> implements Serializable {
 //		System.out.println(node.getValue() + "PRIM");
 		int key = node.getPos();
 
-		double dist[] = new double[AMOUNT1];
+		double dist[] = new double[vertices.size()];
 		int order[] = new int[vertices.size()];
-		String parent[] = new String[AMOUNT1];
-		boolean[] visits = new boolean[AMOUNT1];
+		String parent[] = new String[vertices.size()];
+		boolean[] visits = new boolean[vertices.size()];
 		for (int i = 0; i < visits.length; i++) {
 			dist[i] = INFINITY;
 			visits[i] = false;

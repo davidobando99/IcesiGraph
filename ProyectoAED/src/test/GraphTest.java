@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import org.junit.jupiter.api.Test;
 
 import collections.Graph;
@@ -199,8 +198,16 @@ class GraphTest {
 		setUpTwo();
 
 		int[] prim = graph.primMTS();
+		
+		assertTrue(prim[0]==1);
+		assertTrue(prim[1]==3);
+//		assertTrue(prim[0]==1);
+//		assertTrue(prim[0]==1);
+//		assertTrue(prim[0]==1);
+//		assertTrue(prim[0]==1);
+//		assertTrue(prim[0]==1);
 
-		assertTrue(prim[0] == 1);
+		
 
 	}
 
