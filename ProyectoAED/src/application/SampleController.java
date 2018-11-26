@@ -18,6 +18,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import modelo.Building;
 import modelo.Icesi;
 
@@ -126,6 +129,9 @@ public class SampleController {
 	private String originPoint;
 
 	private String endPoint;
+	
+	private String originName;
+	private String endName;
 
 	private boolean isMouseIn;
 	
@@ -138,7 +144,7 @@ public class SampleController {
 
 	public void initialize() {
 
-		isMouseIn = false;
+		isMouseIn = true;
 		path = true;
 		origin = "";
 		end = "";
@@ -148,6 +154,7 @@ public class SampleController {
 		addRectangles();
 		for (int i = 0; i < rectangles.size(); i++) {
 			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
+			
 			showText(rectangles.get(i), rectangles.get(i).getId());
 		}
 
@@ -281,6 +288,27 @@ public class SampleController {
 		}
 
 	}
+	
+	public void route(String building) {
+		if (isMouseIn) {
+			originName = building;
+			isMouseIn = false;
+		} else {
+			endName = building;
+		}
+
+		if ((origin != "" && end == "")||(end != "" && origin == "")) {
+//			if (originPoint != "" && endPoint != "") {
+//				if (isLine) {
+//					drawLines(originPoint, endPoint);
+//				}
+//
+//			}
+			way(origin, end);
+			System.out.println("INICIO " + origin + " FIN " + end);
+		}
+
+	}
 
 	public Building getBuilding(Rectangle build, String name) {
 		Building building = null;
@@ -320,19 +348,28 @@ public class SampleController {
 
 	
 	private void showText(Rectangle rec,String name) {
+		 
     rec.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			
-
+          
 			@Override
 			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				gc.fillText(name, rec.getLayoutX(), rec.getLayoutY());
 				
-			}
-
+			
+				if ((originName != "" && endName != "")) {
+					refreshText();
+				}
+				
+				gc.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 15.0));
+				gc.setStroke(Color.WHITE);
+				gc.strokeText(name, rec.getLayoutX(), rec.getLayoutY());
+				route(name);
+				}
+			
 		});
+		 
+			 
+		 
 	}
 	private void clickBuildings(Rectangle rec, String name) {
 		//rec.setOnMouseMoved(arg0);
@@ -385,6 +422,15 @@ public class SampleController {
 		end = "";
 		originPoint = "";
 		endPoint = "";
+		
+		
+		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
+	}
+	
+	public void refreshText() {
+        originName="";
+		
+		isMouseIn=true;
 		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
 	}
 
