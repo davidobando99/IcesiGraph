@@ -63,6 +63,8 @@ public class SampleController {
 
 	@FXML
 	private Canvas canvas;
+	@FXML
+	private Canvas canvas2;
 
 	@FXML
 	private Rectangle D;
@@ -122,6 +124,8 @@ public class SampleController {
 	private Rectangle F;
 
 	private GraphicsContext gc;
+	
+	private GraphicsContext gc2;
 	private String origin;
 
 	private String end;
@@ -152,14 +156,18 @@ public class SampleController {
 		verificateMap();
 		rectangles = new ArrayList<Rectangle>();
 		addRectangles();
+		gc = canvas.getGraphicsContext2D();
+		gc2 = canvas2.getGraphicsContext2D();
 		for (int i = 0; i < rectangles.size(); i++) {
-			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
 			
 			showText(rectangles.get(i), rectangles.get(i).getId());
+		
+			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
+			
+			
 		}
 
-		canvas();
-
+		
 	}
 
 	@FXML
@@ -294,19 +302,10 @@ public class SampleController {
 			originName = building;
 			isMouseIn = false;
 		} else {
-			endName = building;
+			originName = building;
 		}
 
-		if ((origin != "" && end == "")||(end != "" && origin == "")) {
-//			if (originPoint != "" && endPoint != "") {
-//				if (isLine) {
-//					drawLines(originPoint, endPoint);
-//				}
-//
-//			}
-			way(origin, end);
-			System.out.println("INICIO " + origin + " FIN " + end);
-		}
+	
 
 	}
 
@@ -356,15 +355,16 @@ public class SampleController {
 			public void handle(MouseEvent event) {
 				
 			
-				if ((originName != "" && endName != "")) {
+				if ((originName != "")) {
 					refreshText();
 				}
 				
-				gc.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 15.0));
-				gc.setStroke(Color.WHITE);
-				gc.strokeText(name, rec.getLayoutX(), rec.getLayoutY());
+				gc2.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 15.0));
+				gc2.setStroke(Color.WHITE);
+				gc2.strokeText(name, rec.getLayoutX(), rec.getLayoutY());
 				route(name);
 				}
+			
 			
 		});
 		 
@@ -431,7 +431,7 @@ public class SampleController {
         originName="";
 		
 		isMouseIn=true;
-		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
+		gc2.clearRect(canvas2.getLayoutX(), canvas2.getLayoutY(), canvas2.getWidth(), canvas2.getWidth());
 	}
 
 	public void tourUniversity() {

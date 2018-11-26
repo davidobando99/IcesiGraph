@@ -34,6 +34,7 @@
                            </image>
                         </ImageView>
                         <Canvas fx:id="canvas" height="677.0" layoutX="25.0" layoutY="26.0" width="845.0" />
+                        <Canvas fx:id="canvas2" height="674.0" layoutX="25.0" layoutY="26.0" width="910.0" />
                         <Rectangle fx:id="Coliseo1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="488.0" layoutY="434.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="81.0" />
                         <Rectangle fx:id="L" arcHeight="5.0" arcWidth="5.0" fill="#2193ff" height="76.0" layoutX="448.0" layoutY="254.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="137.0" />
                         <Rectangle fx:id="C" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="111.0" layoutX="486.0" layoutY="112.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
