@@ -1,7 +1,9 @@
 package application;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -31,6 +34,9 @@ public class SampleController {
 	private Icesi icesi;
 	@FXML
 	private ImageView map;
+
+	@FXML
+	private Button butRuta;
 
 	@FXML
 	private ListView<String> listBuildings;
@@ -68,8 +74,8 @@ public class SampleController {
 	@FXML
 	private Canvas canvas2;
 
-    @FXML
-    private Canvas canvas3;
+	@FXML
+	private Canvas canvas3;
 
 	@FXML
 	private Rectangle D;
@@ -127,12 +133,21 @@ public class SampleController {
 
 	@FXML
 	private Rectangle F;
-	
-	  @FXML
-	    private Text ruta;
+
+	@FXML
+	private TextField origintxt;
+
+	@FXML
+	private TextField endtxt;
+
+	@FXML
+	private TextField peso;
+
+	@FXML
+	private Text ruta;
 
 	private GraphicsContext gc;
-	
+
 	private GraphicsContext gc2;
 	private GraphicsContext gc3;
 	private String origin;
@@ -142,12 +157,12 @@ public class SampleController {
 	private String originPoint;
 
 	private String endPoint;
-	
+
 	private String originName;
 	private String endName;
 
 	private boolean isMouseIn;
-	
+
 	/**
 	 * True para inicio False para final
 	 */
@@ -162,22 +177,31 @@ public class SampleController {
 		origin = "";
 		end = "";
 		icesi = new Icesi();
+
 		verificateMap();
 		rectangles = new ArrayList<Rectangle>();
 		addRectangles();
+		// addRoute() ;
 		gc = canvas.getGraphicsContext2D();
 		gc2 = canvas2.getGraphicsContext2D();
 		gc3 = canvas3.getGraphicsContext2D();
 		for (int i = 0; i < rectangles.size(); i++) {
-			
+
 			showText(rectangles.get(i), rectangles.get(i).getId());
-		
+
 			clickBuildings(rectangles.get(i), rectangles.get(i).getId());
-			
-			
+
 		}
 
-		
+	}
+
+	@FXML
+	void butRuta(ActionEvent event) {
+		addRoute();
+		origintxt.setText("");
+		endtxt.setText("");
+		peso.setText("");
+
 	}
 
 	@FXML
@@ -218,11 +242,26 @@ public class SampleController {
 
 	}
 
+	public void addRoute() {
+		double weight = Double.parseDouble(peso.getText());
+
+		try {
+			icesi.addRoute(weight, origintxt.getText(), endtxt.getText());
+			JOptionPane.showMessageDialog(null, "Se agrego ruta correctamente");
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "No existe un edificio con ese nombre");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "CRACK");
+		}
+	}
+
 	public void way(String origin, String end) {
 
 		String rute = "";
-		
-		String[] distances= icesi.distancesDijkstra(origin,end);
+
+		String[] distances = icesi.distancesDijkstra(origin, end);
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		Building anterior = null;
 		for (int i = 0; i < distances.length; i++) {
@@ -231,25 +270,22 @@ public class SampleController {
 				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
 						getRectangle(lista.get(i).getName()).getLayoutX(),
 						getRectangle(lista.get(i).getName()).getLayoutY());
-				rute += anterior.getName()+" --> "+lista.get(i).getName() +" , Distancia "+ distances[i]+" mts "+ " \n";
-				
+				rute += anterior.getName() + " --> " + lista.get(i).getName() + " , Distancia " + distances[i] + " mts "
+						+ " \n";
+
 			}
-			gc3.setFont(Font.font("Berlin Sans FB Demi", FontWeight.BLACK,FontPosture.ITALIC, 18.0));
+			gc3.setFont(Font.font("Berlin Sans FB Demi", FontWeight.BLACK, FontPosture.ITALIC, 18.0));
 			gc3.setFill(Color.DARKBLUE);
-			
+
 			gc3.fillText(distances[i], getRectangle(lista.get(i).getName()).getLayoutX(),
 					getRectangle(lista.get(i).getName()).getLayoutY());
 
-			
-			
 		}
-		rute+="Distancia total desde "+origin +" hasta  "+end+" = "+icesi.total(origin, end)+" mts";
-		ruta.setText("RUTA "+"( "+origin+" -- "+end+" )");
+		rute += "Distancia total desde " + origin + " hasta  " + end + " = " + icesi.total(origin, end) + " mts";
+		ruta.setText("RUTA " + "( " + origin + " -- " + end + " )");
 		txtRute.setFont(Font.font("Berlin Sans FB Demi", FontWeight.BLACK, FontPosture.ITALIC, 14.0));
 		txtRute.setText(rute);
 	}
-
-
 
 	public void drawLines(String origin, String end) {
 		gc.setStroke(Color.WHITE);
@@ -258,7 +294,7 @@ public class SampleController {
 		gc.appendSVGPath("M " + origin + " L " + end);
 		gc.closePath();
 		gc.stroke();
-		
+
 	}
 
 	public void verificateMap() {
@@ -267,8 +303,8 @@ public class SampleController {
 
 			@Override
 			public void handle(MouseEvent event) {
-//				System.out.println(event.getX());
-//				System.out.println(event.getY());
+				// System.out.println(event.getX());
+				// System.out.println(event.getY());
 
 			}
 
@@ -289,11 +325,11 @@ public class SampleController {
 		if (origin != "" && end != "") {
 
 			way(origin, end);
-			
+
 		}
 
 	}
-	
+
 	public void route(String building) {
 		if (isMouseIn) {
 			originName = building;
@@ -302,15 +338,13 @@ public class SampleController {
 			originName = building;
 		}
 
-	
-
 	}
 
 	public Building getBuilding(Rectangle build, String name) {
 		Building building = null;
 		if (build.getOpacity() == 1) {
 			building = icesi.getGraph().searchVertex(name).getValue();
-//			System.out.println(building.getName());
+			// System.out.println(building.getName());
 		}
 		return building;
 	}
@@ -339,48 +373,41 @@ public class SampleController {
 		String origin = X1 + " " + Y1;
 		String end = X2 + " " + Y2;
 		drawLines(origin, end);
-		
 
 	}
 
-	
-	private void showText(Rectangle rec,String name) {
-		 
-    rec.setOnMouseMoved(new EventHandler<MouseEvent>() {
-			
-          
+	private void showText(Rectangle rec, String name) {
+
+		rec.setOnMouseMoved(new EventHandler<MouseEvent>() {
+
 			@Override
 			public void handle(MouseEvent event) {
-				
-			
+
 				if ((originName != "")) {
 					refreshText();
 				}
-				
+
 				gc2.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 15.0));
 				gc2.setStroke(Color.WHITE);
 				gc2.strokeText(name, rec.getLayoutX(), rec.getLayoutY());
 				route(name);
-				}
-			
-			
+			}
+
 		});
-		 
-			 
-		 
+
 	}
+
 	private void clickBuildings(Rectangle rec, String name) {
-		
+
 		rec.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			
 
 			@Override
 			public void handle(MouseEvent event) {
 				if (origin != "" && end != "") {
 					refresh();
 				}
-//				rec.setVisible(true);
-//				rec.setOpacity(1);
+				// rec.setVisible(true);
+				// rec.setOpacity(1);
 
 				getBuilding(rec, name);
 				origen(name, rec.getLayoutX(), rec.getLayoutY());
@@ -388,8 +415,6 @@ public class SampleController {
 
 		});
 	}
-
-	
 
 	public void refresh() {
 		txtRute.setText(" ");
@@ -405,15 +430,15 @@ public class SampleController {
 		originPoint = "";
 		endPoint = "";
 		ruta.setText("RUTA");
-		
+
 		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
 		gc3.clearRect(canvas3.getLayoutX(), canvas3.getLayoutY(), canvas3.getWidth(), canvas3.getWidth());
 	}
-	
+
 	public void refreshText() {
-        originName="";
-		
-		isMouseIn=true;
+		originName = "";
+
+		isMouseIn = true;
 		gc2.clearRect(canvas2.getLayoutX(), canvas2.getLayoutY(), canvas2.getWidth(), canvas2.getWidth());
 	}
 
@@ -421,10 +446,10 @@ public class SampleController {
 
 		ObservableList<String> items = FXCollections.observableArrayList();
 
-		String []lista=icesi.kruskal();
+		String[] lista = icesi.kruskal();
 		String[] info = icesi.primMTS();
 		for (int i = 0; i < lista.length; i++) {
-			items.add(info[i]+"         "+lista[i]);
+			items.add(info[i] + "         " + lista[i]);
 		}
 
 		ListTour.setItems(items);

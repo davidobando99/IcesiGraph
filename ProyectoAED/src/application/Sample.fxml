@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -78,15 +79,51 @@
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <ImageView fitHeight="566.0" fitWidth="1001.0" layoutX="345.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="589.0" fitWidth="1107.0" layoutX="345.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../Desktop/Arbol%20generador%20minimo.jpg" />
+                              <Image url="@../../imagenes/Arbol%20generador%20minimo.jpg" />
                            </image>
                         </ImageView>
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="BUSQUEDA">
+            <Tab text="AGREGAR RUTA">
+              <content>
+                <AnchorPane fx:id="listaBuilds" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="origintxt" layoutX="294.0" layoutY="108.0" />
+                        <TextField fx:id="endtxt" layoutX="294.0" layoutY="166.0" />
+                        <Text fill="#ab1d1d" layoutX="79.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AGREGAR NUEVA RUTA ENTRE UN EDIFICIO Y OTRO" wrappingWidth="653.708984375">
+                           <font>
+                              <Font name="Bodoni MT Black" size="21.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="peso" layoutX="294.0" layoutY="217.0" />
+                        <Text layoutX="79.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIFICIO ORIGEN" wrappingWidth="188.708984375">
+                           <font>
+                              <Font name="Bodoni MT Black" size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="76.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIFICIO DESTINO" wrappingWidth="188.708984375">
+                           <font>
+                              <Font name="Bodoni MT Black" size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="76.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PESO" wrappingWidth="188.708984375">
+                           <font>
+                              <Font name="Bodoni MT Black" size="17.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="butRuta" layoutX="242.0" layoutY="298.0" mnemonicParsing="false" onAction="#butRuta" text="AGREGAR" textFill="#bc1e1e">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="BFS">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
