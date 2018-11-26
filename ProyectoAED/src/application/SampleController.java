@@ -22,6 +22,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import modelo.Building;
 import modelo.Icesi;
 
@@ -66,6 +67,9 @@ public class SampleController {
 	private Canvas canvas;
 	@FXML
 	private Canvas canvas2;
+
+    @FXML
+    private Canvas canvas3;
 
 	@FXML
 	private Rectangle D;
@@ -123,10 +127,14 @@ public class SampleController {
 
 	@FXML
 	private Rectangle F;
+	
+	  @FXML
+	    private Text ruta;
 
 	private GraphicsContext gc;
 	
 	private GraphicsContext gc2;
+	private GraphicsContext gc3;
 	private String origin;
 
 	private String end;
@@ -159,6 +167,7 @@ public class SampleController {
 		addRectangles();
 		gc = canvas.getGraphicsContext2D();
 		gc2 = canvas2.getGraphicsContext2D();
+		gc3 = canvas3.getGraphicsContext2D();
 		for (int i = 0; i < rectangles.size(); i++) {
 			
 			showText(rectangles.get(i), rectangles.get(i).getId());
@@ -212,7 +221,7 @@ public class SampleController {
 	public void way(String origin, String end) {
 
 		String rute = "";
-		//String [] info1= icesi.dij(origin);
+		
 		String[] distances= icesi.distancesDijkstra(origin,end);
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		Building anterior = null;
@@ -222,40 +231,26 @@ public class SampleController {
 				drawRoute(getRectangle(anterior.getName()).getLayoutX(), getRectangle(anterior.getName()).getLayoutY(),
 						getRectangle(lista.get(i).getName()).getLayoutX(),
 						getRectangle(lista.get(i).getName()).getLayoutY());
-//				
+				rute += anterior.getName()+" --> "+lista.get(i).getName() +" , Distancia "+ distances[i]+" mts "+ " \n";
 				
 			}
-			gc2.strokeText(distances[i], getRectangle(lista.get(i).getName()).getLayoutX()+30,
-					getRectangle(lista.get(i).getName()).getLayoutY()+30);
+			gc3.setFont(Font.font("Berlin Sans FB Demi", FontWeight.BLACK,FontPosture.ITALIC, 18.0));
+			gc3.setFill(Color.DARKBLUE);
+			
+			gc3.fillText(distances[i], getRectangle(lista.get(i).getName()).getLayoutX(),
+					getRectangle(lista.get(i).getName()).getLayoutY());
 
-			//rute += lista.get(i).getName() +" , "+ info1[i]+ " \n";
-			rute += lista.get(i).getName() + " \n";
+			
+			
 		}
-
+		rute+="Distancia total desde "+origin +" hasta  "+end+" = "+icesi.total(origin, end)+" mts";
+		ruta.setText("RUTA "+"( "+origin+" -- "+end+" )");
+		txtRute.setFont(Font.font("Berlin Sans FB Demi", FontWeight.BLACK, FontPosture.ITALIC, 14.0));
 		txtRute.setText(rute);
 	}
 
-	public void canvas() {
-		// Image image = new
-		// Image(getClass().getResourceAsStream("./imagenes/mapa.png"));
 
-		gc = canvas.getGraphicsContext2D();
-		gc.fillRect(canvas.getLayoutX(), canvas.getLayoutY(), 60, 60);
-		gc.fillRect(canvas.getLayoutX() + 60, canvas.getLayoutY() + 60, 60, 60);
 
-		// gc.appendSVGPath("M "+L.getLayoutX()+" "+L.getLayoutY()+" L
-		// "+A.getLayoutX()+" "+A.getLayoutY());
-
-	}
-
-//	public void drawLines(double X1, double Y1, double X2, double Y2) {
-//		 gc.setStroke(Color.BLUE);
-//		 gc.setLineWidth(5.0);
-//		 gc.beginPath();
-//		 gc.appendSVGPath("M "+X1+" "+Y1+" L "+X2+" "+Y2);
-//		 gc.closePath();
-//		 gc.stroke();
-//	}
 	public void drawLines(String origin, String end) {
 		gc.setStroke(Color.WHITE);
 		gc.setLineWidth(4.0);
@@ -292,14 +287,9 @@ public class SampleController {
 		}
 
 		if (origin != "" && end != "") {
-//			if (originPoint != "" && endPoint != "") {
-//				if (isLine) {
-//					drawLines(originPoint, endPoint);
-//				}
-//
-//			}
+
 			way(origin, end);
-			System.out.println("INICIO " + origin + " FIN " + end);
+			
 		}
 
 	}
@@ -380,7 +370,7 @@ public class SampleController {
 		 
 	}
 	private void clickBuildings(Rectangle rec, String name) {
-		//rec.setOnMouseMoved(arg0);
+		
 		rec.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
 
@@ -389,8 +379,8 @@ public class SampleController {
 				if (origin != "" && end != "") {
 					refresh();
 				}
-				rec.setVisible(true);
-				rec.setOpacity(1);
+//				rec.setVisible(true);
+//				rec.setOpacity(1);
 
 				getBuilding(rec, name);
 				origen(name, rec.getLayoutX(), rec.getLayoutY());
@@ -399,23 +389,7 @@ public class SampleController {
 		});
 	}
 
-	private void coliseo1Click() {
-		Coliseo1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (origin != "" && end != "") {
-					refresh();
-				}
-				Coliseo1.setVisible(true);
-				Coliseo1.setOpacity(1);
-
-				getBuilding(Coliseo1, "Coliseo1");
-				origen("Coliseo1", Coliseo1.getLayoutX(), Coliseo1.getLayoutY());
-			}
-
-		});
-	}
+	
 
 	public void refresh() {
 		txtRute.setText(" ");
@@ -430,9 +404,10 @@ public class SampleController {
 		end = "";
 		originPoint = "";
 		endPoint = "";
-		
+		ruta.setText("RUTA");
 		
 		gc.clearRect(canvas.getLayoutX(), canvas.getLayoutY(), canvas.getWidth(), canvas.getWidth());
+		gc3.clearRect(canvas3.getLayoutX(), canvas3.getLayoutY(), canvas3.getWidth(), canvas3.getWidth());
 	}
 	
 	public void refreshText() {

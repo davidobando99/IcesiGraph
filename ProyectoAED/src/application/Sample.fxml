@@ -13,6 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
@@ -22,12 +23,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="754.0" prefWidth="1203.0">
                      <children>
-                        <Button fx:id="butRute" layoutX="1059.0" layoutY="43.0" mnemonicParsing="false" text="Mostrar Ruta" textFill="#1a5d9c">
+                        <Text fx:id="ruta" fill="#872b2b" layoutX="955.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RUTA" textAlignment="CENTER" wrappingWidth="440.13671875">
                            <font>
-                              <Font name="System Bold Italic" size="17.0" />
+                              <Font name="System Bold Italic" size="28.0" />
                            </font>
-                        </Button>
-                        <TextArea fx:id="txtRute" layoutX="955.0" layoutY="100.0" prefHeight="363.0" prefWidth="336.0" />
+                        </Text>
+                        <TextArea fx:id="txtRute" layoutX="955.0" layoutY="100.0" prefHeight="363.0" prefWidth="441.0" />
                         <ImageView fx:id="map" fitHeight="676.0" fitWidth="947.0" layoutX="25.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../imagenes/mapaa.png" />
@@ -35,6 +36,7 @@
                         </ImageView>
                         <Canvas fx:id="canvas" height="677.0" layoutX="25.0" layoutY="26.0" width="845.0" />
                         <Canvas fx:id="canvas2" height="674.0" layoutX="25.0" layoutY="26.0" width="910.0" />
+                        <Canvas fx:id="canvas3" height="674.0" layoutX="25.0" layoutY="26.0" width="910.0" />
                         <Rectangle fx:id="Coliseo1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="488.0" layoutY="434.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="81.0" />
                         <Rectangle fx:id="L" arcHeight="5.0" arcWidth="5.0" fill="#2193ff" height="76.0" layoutX="448.0" layoutY="254.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="137.0" />
                         <Rectangle fx:id="C" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="111.0" layoutX="486.0" layoutY="112.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />

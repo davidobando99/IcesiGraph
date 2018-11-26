@@ -157,24 +157,60 @@ public void dijkstraWe() {
 		ArrayList<Building> nodes =wayTo(origin,end);
 		double[] distances=graph.dijkstra(origin);
 		String[] route=new String[nodes.size()];
+		int posAnterior=0;
+		int posActual=0;
+		int distance=0;
 		for (int i = 0; i < route.length; i++) {
-			
-			int pos= graph.searchVertex(nodes.get(i).getName()).getPos();
-			System.out.println(pos+"name "+nodes.get(i).getName()+"distance "+distances[pos]);
-			route[i]=(int)(distances[pos])+"";
-			System.out.println("# dijkstra "+distances.length);
-			System.out.println("# nodes "+nodes.size());
+			if(i>0) {
+				posAnterior= graph.searchVertex(nodes.get(i-1).getName()).getPos();
+				posActual= graph.searchVertex(nodes.get(i).getName()).getPos();
+				distance=(int) (distances[posActual]-distances[posAnterior]);
+				route[i]=(int)(distance)+"";
+			}
+			else {
+			posActual= graph.searchVertex(nodes.get(i).getName()).getPos();
+			distance=(int) (distances[posActual]-0);
+			route[i]=(int)(distance)+"";
+			}
 		}
 		return route;
 	}
 	
-	public String[] dij(String origin) {
-		String[] route=new String[graph.dijkstra(origin).length];
+public String total(String origin, String end) {
+		
+		ArrayList<Building> nodes =wayTo(origin,end);
+		double[] distances=graph.dijkstra(origin);
+		String route="";
+		
+		int posActual=0;
+		
+		posActual= graph.searchVertex(end).getPos();
+			
+			route=(int)(distances[posActual])+"";
+			
+		return route;
+	}
+	
+public String[] distancesDijkstras(String origin, String end) {
+		
+		ArrayList<Building> nodes =wayTo(origin,end);
+		double[] distances=graph.dijkstra(origin);
+		String[] route=new String[nodes.size()];
+		int posAnterior=0;
+		int posActual=0;
+		int distance=0;
 		for (int i = 0; i < route.length; i++) {
-			route[i]="Distancia: "+(int)graph.dijkstra(origin)[i];
+//			if(i>0) {
+//				posAnterior= graph.searchVertex(nodes.get(i-1).getName()).getPos();
+//			}
+			posActual= graph.searchVertex(nodes.get(i).getName()).getPos();
+			//distance=(int) (distances[posActual]-distances[posAnterior]);
+			route[i]=(int)(distances[posActual])+"";
 		}
 		return route;
 	}
+	
+	
 	public String[] kruskal() {
 		String [] info= new String[graph.kruskal().length];
 		Double [] krus=graph.kruskal();
