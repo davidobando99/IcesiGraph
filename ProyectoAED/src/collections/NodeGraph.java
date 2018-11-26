@@ -62,10 +62,6 @@ public class NodeGraph<V>implements Serializable {
 		adjList.remove(adjacent);
 	}
 	
-//	public  NodeGraph<V> searchBoolean(String key){
-//		return adjList.get(key);
-//	}
-
 	public int getPos() {
 		return posX;
 	}

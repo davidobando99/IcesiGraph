@@ -19,15 +19,6 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			
-//			scene.setOnAction(new EventHandler<ActionEvent>() {
-//		        @Override
-//		        public void handle(MouseEvent mouseEvent) {
-//		            // Insertar aquí el código a ejecutar cuando se suelte el ratón
-//		            System.out.println("Mouse released X : Y - " + 
-//		                    mouseEvent.getX() + " : " + mouseEvent.getY());
-//		        }
-//		    });
-//			// De
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
