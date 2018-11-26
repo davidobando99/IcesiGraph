@@ -212,6 +212,7 @@ public class SampleController {
 	public void way(String origin, String end) {
 
 		String rute = "";
+		String [] info1= icesi.dij();
 		ArrayList<Building> lista = icesi.wayTo(origin, end);
 		Building anterior = null;
 		for (int i = 0; i < lista.size(); i++) {
@@ -223,7 +224,7 @@ public class SampleController {
 						getRectangle(lista.get(i).getName()).getLayoutY());
 			}
 
-			rute += lista.get(i).getName() + " \n";
+			rute += lista.get(i).getName() +" , "+ info1[i]+ " \n";
 
 		}
 
@@ -439,9 +440,10 @@ public class SampleController {
 
 		ObservableList<String> items = FXCollections.observableArrayList();
 
+		String []lista=icesi.kruskal();
 		String[] info = icesi.primMTS();
-		for (int i = 0; i < info.length; i++) {
-			items.add(info[i]);
+		for (int i = 0; i < lista.length; i++) {
+			items.add(info[i]+"         "+lista[i]);
 		}
 
 		ListTour.setItems(items);

@@ -1,14 +1,7 @@
 package collections;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.*;
 
-import modelo.Building;
 
 public class Graph<V, E> implements Serializable {
 
@@ -375,7 +368,7 @@ public class Graph<V, E> implements Serializable {
 		int key = node.getPos();
 
 		double dist[] = new double[AMOUNT1];
-		int order[] = new int[AMOUNT1];
+		int order[] = new int[vertices.size()];
 		String parent[] = new String[AMOUNT1];
 		boolean[] visits = new boolean[AMOUNT1];
 		for (int i = 0; i < visits.length; i++) {

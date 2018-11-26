@@ -38,11 +38,9 @@ public class Icesi {
 
 	}
 
-	public void revisar() {
-		HashMap<String, NodeGraph<Building>> lista = graph.getVertices();
-
-	}
-
+public void dijkstraWe() {
+	
+}
 	public String[] primMTS() {
 		int[] info = graph.primMTS();
 		String[] way = new String[info.length];
@@ -153,10 +151,26 @@ public class Icesi {
 		}
 	}
 
-	public void dij() {
+	public String[] dij() {
+		String[] route=new String[graph.dijkstra("M").length];
 		for (int i = 0; i < graph.dijkstra("M").length; i++) {
-			System.out.println(graph.dijkstra("M")[i]);
+			route[i]="Distancia: "+graph.dijkstra("M")[i];
 		}
+		return route;
+	}
+	public String[] kruskal() {
+		String [] info= new String[graph.kruskal().length];
+		Double [] krus=graph.kruskal();
+		for (int i = 0; i < info.length; i++) {
+			
+//			System.out.println(info.length);
+			info[i]="Distancia "+krus[i];
+			
+		}
+		return info;
+		
+		
+		
 	}
 
 	/**
