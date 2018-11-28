@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Graph<V, E> implements Serializable {
+public class Graph<V, E> implements IGraph<V,E>, Serializable {
 
 	/**
 	 * 
@@ -28,52 +28,57 @@ public class Graph<V, E> implements Serializable {
 
 		inicializeMatrix();
 	}
-
+	@Override
 	public ArrayList<V> getNodes() {
 		return nodes;
 	}
-
+	@Override
 	public void setNodes(ArrayList<V> nodes) {
 		this.nodes = nodes;
 	}
 
+	@Override
 	public int[][] getAdjacentsMatrix() {
 		return adjacentsMatrix;
 	}
 
+	@Override
 	public void setAdjacentsMatrix(int[][] adjacentsMatrix) {
 		this.adjacentsMatrix = adjacentsMatrix;
 	}
 
+	@Override
 	public double[][] getWeightMatrix() {
 		return weightMatrix;
 	}
 
+	@Override
 	public void setWeightMatrix(double[][] weightMatrix) {
 		this.weightMatrix = weightMatrix;
 	}
 
+	@Override
 	public HashMap<String, NodeGraph<V>> getVertices() {
 		return vertices;
 	}
-
+	@Override
 	public void setVertices(HashMap<String, NodeGraph<V>> vertices) {
 		this.vertices = vertices;
 	}
-
+	@Override
 	public ArrayList<Edge<V, E>> getEdges() {
 		return edges;
 	}
-
+	@Override
 	public void setEdges(ArrayList<Edge<V, E>> edges) {
 		this.edges = edges;
 	}
-
+	@Override
 	public NodeGraph<V> searchVertex(String key) {
 		return vertices.get(key);
 	}
 	
-
+	@Override
 	public void addVertex(String key, V newVertex) {
 		if (vertices.isEmpty()) { // Si la tabla esta vacia que la posicion en la matriz sea (0,0)
 			NodeGraph<V> vertex = new NodeGraph<V>(newVertex, 0);
@@ -86,12 +91,12 @@ public class Graph<V, E> implements Serializable {
 		}
 
 	}
-
+	@Override
 	public void removeVertex(String key) {
 		vertices.remove(key);
 
 	}
-
+	@Override
 	public void insertEdge(E edge,String vertex1, String vertex2, double weight) {
 		NodeGraph<V> origin = searchVertex(vertex1);
 		NodeGraph<V> end = searchVertex(vertex2);
@@ -109,7 +114,7 @@ public class Graph<V, E> implements Serializable {
 		end.addAdjacent(origin);
 
 	}
-	
+	@Override
 	public String foundKey(int pos){
 		String found =null;
 	
@@ -130,7 +135,7 @@ public class Graph<V, E> implements Serializable {
 	// return edges.remove(key);
 
 	// }
-
+	@Override
 	public void inicializeMatrix() {
 		for (int i = 0; i < adjacentsMatrix.length; i++) {
 			for (int j = 0; j < adjacentsMatrix[i].length; j++) {
@@ -140,7 +145,7 @@ public class Graph<V, E> implements Serializable {
 		fillWeightMatrix();
 
 	}
-
+	@Override
 	public boolean areAdjacents(String vertex1, String vertex2) {
 		NodeGraph<V> origin = searchVertex(vertex1);
 		NodeGraph<V> end = searchVertex(vertex2);
@@ -149,24 +154,24 @@ public class Graph<V, E> implements Serializable {
 		} else
 			return false;
 	}
-
+	@Override
 	public Double adjacentsWeight(NodeGraph<V> origin, NodeGraph<V> end) {
 		if (weightMatrix[origin.getPos()][end.getPos()] > 0) {
 			return weightMatrix[origin.getPos()][end.getPos()];
 		} else
 			return 0.0;
 	}
-
+	@Override
 	public void addToMatrix(int i, int j) {
 		adjacentsMatrix[i][j] += 1;
 		adjacentsMatrix[j][i] += 1;
 	}
-
+	@Override
 	public void removeFromMatrix(int i, int j) {
 		if (adjacentsMatrix[i][j] > 0)
 			adjacentsMatrix[i][j] -= 1;
 	}
-
+	@Override
 	public double[] dijkstra(String key) {
 		NodeGraph<V> node = searchVertex(key);
 		// System.out.println(node.getValue()+ "value node");
@@ -213,7 +218,7 @@ public class Graph<V, E> implements Serializable {
 	}
 	
 	
-	
+	@Override
 	public int[] dijkstraNodes(String key) {
 		NodeGraph<V> node = searchVertex(key);
 		// System.out.println(node.getValue()+ "value node");
@@ -265,6 +270,7 @@ public class Graph<V, E> implements Serializable {
 		
 		
 	}
+	@Override
 	public void print(int[] previo, int posEnd) {
         if( previo[ posEnd ] != -1 ) {  
         	print(previo, previo[ posEnd ] ); 
@@ -275,13 +281,13 @@ public class Graph<V, E> implements Serializable {
        
     }
 	
-	
+	@Override
 	public int foundPos(String key) {
 		NodeGraph<V> end = searchVertex(key);
 		int posEnd = end.getPos();
 		return posEnd;
 	}
-	
+	@Override
 	public V foundNode(int pos) {
 		NodeGraph<V> node =null;
 		for (Map.Entry<String, NodeGraph<V>> entry : vertices.entrySet()) {
@@ -292,7 +298,7 @@ public class Graph<V, E> implements Serializable {
 		}return node.getValue();
 	}
 	
-
+	@Override
 	public void fillWeightMatrix() {
 
 		for (int i = 0; i < adjacentsMatrix.length; i++) {
@@ -309,7 +315,7 @@ public class Graph<V, E> implements Serializable {
 		}
 
 	}
-
+	@Override
 	public double[][] floydWarshall() {
 
 		double[][] matrix = weightMatrix;
@@ -327,7 +333,7 @@ public class Graph<V, E> implements Serializable {
 		return matrix;
 
 	}
-
+	@Override
 	public Edge<V, E> minEdge() {
 
 		Edge<V, E> min = edges.get(0);
@@ -342,7 +348,7 @@ public class Graph<V, E> implements Serializable {
 		return min;
 
 	}
-
+	@Override
 	public int minWeight(double key[], boolean[] visits) {
 
 		double min = INFINITY;
@@ -360,7 +366,7 @@ public class Graph<V, E> implements Serializable {
 		return val;
 
 	}
-
+	@Override
 	public int[] primMTS() {
 
 		NodeGraph<V> node = minEdge().getOrigin();
@@ -401,13 +407,13 @@ public class Graph<V, E> implements Serializable {
 		return order;
 
 	}
-
+	@Override
 	public void makeSet(int parent[], int n) {
 		for (int i = 0; i < n; i++) {
 			parent[i] = i;
 		}
 	}
-
+	@Override
 	public int find(int parent[], int x) {
 
 		if (x == parent[x]) {
@@ -415,6 +421,7 @@ public class Graph<V, E> implements Serializable {
 		} else
 			return find(parent, parent[x]);
 	}
+	@Override
 
 	public boolean sameRoot(int parent[], int x, int y) {
 		if (find(parent, x) == find(parent, y)) {
@@ -422,13 +429,13 @@ public class Graph<V, E> implements Serializable {
 		} else
 			return false;
 	}
-
+	@Override
 	public void union(int parent[], int x, int y) {
 		int xRoot = find(parent, x);
 		int yRoot = find(parent, y);
 		parent[xRoot] = yRoot;
 	}
-
+	@Override
 	public ArrayList<Edge<V, E>> sortEdges(ArrayList<Edge<V, E>> edges) {
 
 		for (int i = 1; i < edges.size(); i++) {
@@ -442,7 +449,7 @@ public class Graph<V, E> implements Serializable {
 		}
 		return edges;
 	}
-
+	@Override
 	public Double[] kruskal() {
 		int total = 0;
 		int numEdges = 0;
@@ -464,7 +471,7 @@ public class Graph<V, E> implements Serializable {
 
 		return minimunTree;
 	}
-
+	@Override
 	public void dfs(boolean visited[], NodeGraph<V> origin, NodeGraph<V> end) {
 		ArrayList<NodeGraph<V>> vertices = new ArrayList<NodeGraph<V>>();
 		visited[origin.getPos()] = true;
@@ -479,7 +486,7 @@ public class Graph<V, E> implements Serializable {
 	public void displayVertex(NodeGraph<V> a) {
 		System.out.println(a.getValue().toString());
 	}
-
+	@Override
 	public NodeGraph<V> getAdjUnvisitedVertex(NodeGraph<V> as) {
 		for (int j = 0; j < as.getAdjList().size(); j++) {
 			if (!as.getAdjList().get(j).isWasVisited()) {
@@ -489,7 +496,7 @@ public class Graph<V, E> implements Serializable {
 
 		return null;
 	}
-
+	@Override
 	public void assignVisit(ArrayList<NodeGraph<V>> a, NodeGraph<V> ae) {
 		for (int i = 0; i < a.size(); i++) {
 			if (a.get(i) == ae) {
@@ -498,7 +505,7 @@ public class Graph<V, E> implements Serializable {
 
 		}
 	}
-
+	@Override
 	public ArrayList<String> bfsGraph() {
 		Iterator<Map.Entry<String, NodeGraph<V>>> entries = vertices.entrySet().iterator();
 		ArrayList<NodeGraph<V>> vertexList = new ArrayList<NodeGraph<V>>();
@@ -528,7 +535,7 @@ public class Graph<V, E> implements Serializable {
 		}
          return all;
 	}
-
+	@Override
 	public void dfsGraph(NodeGraph<V> node) {
 		Stack<NodeGraph<V>> stack = new Stack<NodeGraph<V>>();
 		stack.add(node);
@@ -547,7 +554,7 @@ public class Graph<V, E> implements Serializable {
 			}
 		}
 	}
-	
+	@Override
 	public Edge<V, E> searchEdge(double weight){
 		boolean wasFound = false;
 		Edge<V,E> aux = null;
@@ -681,5 +688,6 @@ public class Graph<V, E> implements Serializable {
 		
 	}
 	//
+	
 
 }
